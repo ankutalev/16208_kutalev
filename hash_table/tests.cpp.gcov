@@ -1,0 +1,94 @@
+        -:    0:Source:tests.cpp
+        -:    0:Graph:tests.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
+        -:    1:#include "main.cpp"
+        -:    2:#include <gtest/gtest.h>
+    #####:    3:TEST(Insert_and_empty_testing, poni) {
+    #####:    4:    HashTable X;
+    #####:    5:    Value Y;
+    #####:    6:    ASSERT_EQ(true,X.Empty());
+    #####:    7:    ASSERT_EQ(true, X.Insert("RAINBOW DASH",Y));
+    #####:    8:    ASSERT_EQ(false,X.Empty());
+    #####:    9:    ASSERT_EQ(true,X.Insert("APPLE JACK",Y));
+    #####:   10:    ASSERT_EQ(true,X.Insert("GREAT AND POWERFUL TRIXIE",Y));
+        -:   11:}
+    #####:   12:TEST(Contains,poni) {
+    #####:   13:    HashTable X;
+    #####:   14:    Value Y;
+    #####:   15:    ASSERT_EQ(X.Contains("RAINBOW DASH"),false);
+    #####:   16:    X.Insert("RAINBOW DASH",Y);
+    #####:   17:    ASSERT_EQ(X.Contains("RAINBOW DASH"),true);
+    #####:   18:    ASSERT_EQ(X.Contains("TWILIGHT SPARKLE"),false);
+        -:   19:}
+    #####:   20:TEST(Clear,poni) {
+    #####:   21:    HashTable X;
+    #####:   22:    Value Y;
+    #####:   23:    X.Insert("RARITY",Y);
+    #####:   24:    X.Clear();
+    #####:   25:    ASSERT_EQ(true,X.Empty());
+        -:   26:}
+    #####:   27:TEST(Erase, poni) {
+    #####:   28:    HashTable X;
+    #####:   29:    Value Y(100500,20),T;
+    #####:   30:    X.Insert("RAINBOW DASH",T);
+    #####:   31:    X.Insert("FLUTTERSHY",Y);
+    #####:   32:    ASSERT_EQ(X.Erase("FLUTTERSHY"),true);
+    #####:   33:    ASSERT_EQ(X.Erase("KAMA THE BULLET"),false);
+    #####:   34:    ASSERT_EQ(X.Contains("FLUTTERSHY"),false);
+        -:   35:}
+    #####:   36:TEST(BRACKETS,poni){
+    #####:   37:    HashTable X;
+    #####:   38:    Value Y(3,5),D;
+    #####:   39:    X.Insert("RAINBOW DASH",Y);
+    #####:   40:    Value C = X["RAINBOW DASH"];
+    #####:   41:    Value kama = X["KAMA THE BULLET"];
+    #####:   42:    ASSERT_EQ(C.age,Y.age);
+    #####:   43:    ASSERT_EQ(C.weight,Y.weight);
+    #####:   44:    ASSERT_EQ(D.age,kama.age);
+    #####:   45:    ASSERT_EQ(D.weight,kama.weight);
+        -:   46:}
+    #####:   47:TEST(size,poni) {
+    #####:   48:    HashTable X;
+    #####:   49:    Value Y;
+        -:   50:
+    #####:   51:    X.Insert("RAINBOW DASH",Y);
+    #####:   52:    X.Insert("APPLE JACK",Y);
+    #####:   53:    X.Insert("GREAT AND POWERFUL TRIXIE",Y);
+    #####:   54:    X.Insert("PINKIE PIE",Y);
+    #####:   55:    ASSERT_EQ(4,X.Size());
+    #####:   56:    X.Erase("PINKIE PIE");
+    #####:   57:    ASSERT_EQ(3,X.Size());
+        -:   58:}
+    #####:   59:TEST(at,poni) {
+    #####:   60:    HashTable X;
+    #####:   61:    Value Y(5,4);
+    #####:   62:    X.Insert("RAINBOW DASH",Y);
+    #####:   63:    Value R = X.At("RAINBOW DASH");
+    #####:   64:    ASSERT_EQ(5,R.age);
+    #####:   65:    ASSERT_EQ(4,R.weight);
+    #####:   66:    ASSERT_ANY_THROW(R = X.At("TWILIGHT SPARKLE"));
+        -:   67:}
+    #####:   68:TEST(equal,poni) {
+    #####:   69:    HashTable X1,Y1,X2,Y2;
+    #####:   70:    Value P;
+    #####:   71:    X1.Insert("RAINBOW DASH",P);
+    #####:   72:    Y1.Insert("RAINBOW DASH",P);
+    #####:   73:    ASSERT_EQ(true,X1==Y1);
+    #####:   74:    X2.Insert("APPLE JACK",P);
+    #####:   75:    ASSERT_EQ(false,X2==X1);
+    #####:   76:    Y2=X2;
+    #####:   77:    ASSERT_EQ(true,X2==Y2);
+    #####:   78:    HashTable Z = Y2;
+    #####:   79:    ASSERT_EQ(Y2==Z,true);
+    #####:   80:    X2.Erase("APPLE JACK");
+    #####:   81:    ASSERT_EQ(false,X2==Y1);
+        -:   82:}
+    #####:   83:int main(int argc, char** argv)
+        -:   84:{
+    #####:   85:    testing:: InitGoogleTest(&argc,argv);
+    #####:   86:    return RUN_ALL_TESTS();
+    #####:   87:}
+        -:   88:
+        -:   89:

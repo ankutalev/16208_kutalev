@@ -1,0 +1,416 @@
+        -:    0:Source:main.cpp
+        -:    0:Graph:tests.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
+        -:    0:Source is newer than graph
+        -:    1:#include <iostream>
+        -:    2:#include <string>
+        -:    3:#include <assert.h>
+        -:    4:
+        -:    5:using namespace std;
+        -:    6:typedef string Key;
+        -:    7:
+        -:    8:const int HashConst = 31;
+        -:    9:
+        -:   10:const int HighLoadFactor = 2;
+        -:   11:
+        -:   12:
+    #####:   13:size_t HashCalculation (const Key& in) {
+    #####:   14:    size_t length = in.length();
+    #####:   15:    size_t HashValue = in[length-1] % HashConst;
+    #####:   16:    for(int i=length-2;i>=0;i--)
+    #####:   17:        HashValue= HashValue*HashConst+in[i]%HashConst;
+    #####:   18:    return HashValue;
+        -:   19:}
+        -:   20:struct Value {
+        -:   21:    unsigned age;
+        -:   22:    unsigned weight;
+        -:   23:    Value(int,int);
+        -:   24:    Value();
+        -:   25:};
+    #####:   26:Value::Value () {
+    #####:   27:    age = 20;
+    #####:   28:    weight = 75;
+    #####:   29:}
+    #####:   30:Value::Value (int a, int w):age(a),weight(w) {
+    #####:   31:}
+    #####:   32:struct Node {
+        -:   33:        Value Current;
+        -:   34:        Key CurrentKey = "Default Anonymous";
+        -:   35:        Node* Next = nullptr;
+        -:   36:        Node(const Key&,const Value&);
+        -:   37:};
+    #####:   38:Node::Node(const Key& k ,const Value& t) {
+    #####:   39:    CurrentKey = k;
+    #####:   40:    Current.age = t.age;
+    #####:   41:    Current.weight = t.weight;
+    #####:   42:    Next = nullptr;
+    #####:   43:}
+        -:   44:class EntriesList {
+        -:   45:    public:
+        -:   46:        EntriesList();
+        -:   47:       ~EntriesList(); // destructor
+        -:   48:        EntriesList& operator=(const EntriesList&);// new assignment
+        -:   49:        EntriesList(const EntriesList&); // copy constructor;
+        -:   50:        bool addElement(const Key&,const Value&); // add element to the end of list
+        -:   51:        bool Erase(const Key&); // remove element from list
+        -:   52:        void showList();
+        -:   53:        bool Contains(const Key&) const; // checking value's availability with key
+        -:   54:        bool IsEmpty () const;
+        -:   55:        Node* GetFirst();
+        -:   56:        Value& At (const Key&) const;
+        -:   57:        bool Implace (const Key& k , const Value& v);
+        -:   58:        void Clear();
+        -:   59:        friend bool operator == (const EntriesList&,const EntriesList&);
+        -:   60:    private:
+        -:   61:        Node* head;
+        -:   62:};
+    #####:   63:void EntriesList::Clear() {
+    #####:   64:    while(head) {
+    #####:   65:        Node* tmp = head;
+    #####:   66:        head=head->Next;
+    #####:   67:        delete tmp;
+        -:   68:    }
+    #####:   69:    head = nullptr;
+    #####:   70:}
+    #####:   71:bool operator == (const EntriesList& t1, const EntriesList& t2) {
+    #####:   72:    Node* tmp = t1.head;
+    #####:   73:    while (tmp) {
+    #####:   74:        if(!t2.Contains(tmp->CurrentKey))
+    #####:   75:            return false;
+    #####:   76:            tmp=tmp->Next;
+        -:   77:    }
+    #####:   78:    tmp = t2.head;
+    #####:   79:    while (tmp) {
+    #####:   80:        if(!t1.Contains(tmp->CurrentKey))
+    #####:   81:            return false;
+    #####:   82:            tmp=tmp->Next;
+        -:   83:    }
+    #####:   84:    return true;
+        -:   85:}
+    #####:   86:bool operator != (const EntriesList& t1, const EntriesList& t2) {
+    #####:   87:    return !(t1==t2);
+        -:   88:}
+    #####:   89:Value& EntriesList::At(const Key& k) const {
+    #####:   90:    Node* tmp = head;
+    #####:   91:    while(tmp) {
+    #####:   92:        if(tmp->CurrentKey==k)
+    #####:   93:            return tmp->Current;
+    #####:   94:        tmp=tmp->Next;
+        -:   95:    }
+    #####:   96:    if (!tmp)
+    #####:   97:        throw new exception;
+    #####:   98:}
+        -:   99:
+    #####:  100:bool EntriesList::IsEmpty() const {
+    #####:  101:    return (head) ? false : true;
+        -:  102:}
+    #####:  103:Node* EntriesList :: GetFirst() {
+    #####:  104:    Node* tmp = head;
+    #####:  105:    head=head->Next;
+    #####:  106:    return tmp;
+        -:  107:}
+    #####:  108:bool EntriesList::Contains (const Key& k) const  {
+    #####:  109:    Node* tmp = head;
+    #####:  110:    while(tmp) {
+    #####:  111:        if (tmp->CurrentKey==k)
+    #####:  112:            return true;
+    #####:  113:        tmp=tmp->Next;
+        -:  114:    }
+    #####:  115:    return false;
+        -:  116:}
+    #####:  117:EntriesList:: EntriesList() {
+    #####:  118:    head = nullptr;
+    #####:  119:}
+    #####:  120:EntriesList:: EntriesList(const EntriesList&t) {
+    #####:  121:    head = nullptr;
+    #####:  122:    Node* tmp = t.head;
+    #####:  123:    while (tmp){
+    #####:  124:        this->addElement(tmp->CurrentKey,tmp->Current);
+    #####:  125:        tmp=tmp->Next;
+        -:  126:    }
+    #####:  127:}
+    #####:  128:EntriesList& EntriesList:: operator = (const EntriesList& t) {
+    #####:  129:    if (this!= &t) {
+    #####:  130:        Node* tmp = t.head;
+    #####:  131:        Clear(); //???????????????????????????? ����� �� ��������� ���������� � ������������ �������� ���� �� ���� ��� ������������ ������ �������� ����� ������� ������ ������
+    #####:  132:        while (tmp) {
+    #####:  133:            this->addElement(tmp->CurrentKey, tmp->Current);
+    #####:  134:            tmp = tmp->Next;
+    #####:  135:        }
+    #####:  136:    }
+    #####:  137:        return *this;
+    #####:  138:}
+        -:  139:EntriesList:: ~EntriesList() {
+        -:  140:        while(head) {
+    #####:  141:            Node* tmp= head;
+        -:  142:            head=head->Next;
+    #####:  143:            delete tmp;
+    #####:  144:       }
+    #####:  145:    head = nullptr;
+    #####:  146:}
+    #####:  147:bool EntriesList :: addElement(const Key& k, const Value& info) {
+    #####:  148:    if (!head) {
+        -:  149:        head = new Node(k,info);
+    #####:  150:        if (!head)
+    #####:  151:            return false;
+    #####:  152:    }
+    #####:  153:    else {
+    #####:  154:        Node* tmp = head;
+    #####:  155:        while(tmp->Next)
+    #####:  156:            tmp=tmp->Next;
+        -:  157:        tmp->Next = new Node(k,info);
+        -:  158:        if (!tmp->Next)
+    #####:  159:            return false;
+    #####:  160:    }
+    #####:  161:     return true;
+    #####:  162:}
+    #####:  163:void EntriesList :: showList() {
+    #####:  164:    if(!head)
+        -:  165:        cout<<"Empty list"<<endl;
+    #####:  166:    Node* tmp = head;
+        -:  167:    while (tmp) {
+    #####:  168:        cout<<"Name:"<< tmp->CurrentKey << endl << "Age:" << tmp->Current.age << endl << "Weight:" << tmp->Current.weight << endl;
+    #####:  169:        tmp=tmp->Next;
+    #####:  170:    }
+    #####:  171:}
+    #####:  172:
+    #####:  173:bool EntriesList :: Erase (const Key& k ) {
+    #####:  174:    if (!head)
+        -:  175:        return false;
+    #####:  176:    Node* tmp = head;
+        -:  177:    if (tmp->CurrentKey==k) {
+    #####:  178:        head=head->Next;
+    #####:  179:        delete tmp;
+    #####:  180:        return true;
+    #####:  181:    }
+    #####:  182:    while (tmp->Next) {
+    #####:  183:        if (tmp->Next->CurrentKey==k) {
+    #####:  184:            Node* tmp1= tmp->Next;
+    #####:  185:            tmp->Next=tmp1->Next;
+        -:  186:            delete tmp1;
+    #####:  187:            return true;
+    #####:  188:        }
+    #####:  189:        tmp=tmp->Next;
+    #####:  190:    }
+    #####:  191:    return false;
+    #####:  192:}
+        -:  193:
+    #####:  194:class HashTable {
+        -:  195:    public:
+    #####:  196:        HashTable(); // default constructor
+        -:  197:        ~HashTable();// destructor
+        -:  198:        HashTable(size_t); // constuctor with any capacity
+        -:  199:        HashTable(const HashTable&); // assignment constructor
+        -:  200:        HashTable(HashTable&&); // move constructor;
+        -:  201:        void Swap(HashTable&);// swap values
+        -:  202:        HashTable& operator =(const HashTable&); // new assignment
+        -:  203:        HashTable& operator = (HashTable&&); // move operator;
+        -:  204:        void Clear(); // clear fields
+        -:  205:        bool Erase(const Key&); //  erase field with key ; true if success
+        -:  206:        bool Insert(const Key& , const Value&); // add field ; true if success
+        -:  207:        bool Contains(const Key&) const; // checking value's availability with key
+        -:  208:        Value& operator[](const Key&); //return key's  value; UNSAFE method;
+        -:  209:       //  if there is no value for this key, method will add default value and return link to it
+        -:  210:       Value& At(const Key&);// return key's value; if there is no value - throw exception
+        -:  211:       const Value& At(const Key&) const; // return key's value; if there is no value - throw exception
+        -:  212:       size_t Size() const; // return current hashtable's size
+        -:  213:       bool Empty() const; // true if empty
+        -:  214:       void Show();
+        -:  215:       bool Implace (const Key& k , const Value& v);
+        -:  216:       friend bool operator == (const HashTable&,const HashTable&);
+        -:  217:       friend bool operator != (const HashTable&,const HashTable&);
+        -:  218:    private:
+        -:  219:        size_t size = 0;
+        -:  220:        size_t capacity = 2;
+        -:  221:        EntriesList* data = nullptr;
+        -:  222:        int loadFactor = 0;
+        -:  223:        bool ReHashing();
+        -:  224:
+        -:  225:};
+        -:  226:HashTable::HashTable(HashTable&& t) {
+        -:  227:    //cout<< "move constructor";
+        -:  228:    data = t.data;
+        -:  229:    size = t.size;
+        -:  230:    loadFactor = t.loadFactor;
+    #####:  231:
+        -:  232:
+    #####:  233:    t.data = nullptr;
+    #####:  234:    t.size=0;
+    #####:  235:    t.capacity = 2;
+        -:  236:    t.loadFactor = 0;
+        -:  237:
+    #####:  238:}
+    #####:  239:HashTable& HashTable:: operator = (HashTable&& t) {
+    #####:  240:    // cout<< "move operator";
+    #####:  241:    if (this!= &t) {
+        -:  242:        delete [] data;
+    #####:  243:        data = t.data;
+    #####:  244:
+        -:  245:        size = t.size;
+    #####:  246:        capacity = t.capacity;
+    #####:  247:        loadFactor=t.loadFactor;
+    #####:  248:
+        -:  249:        t.data = nullptr;
+    #####:  250:    }
+    #####:  251:    return *this;
+    #####:  252:}
+        -:  253:void HashTable::Clear() {
+    #####:  254:    delete [] data;
+        -:  255:    size = 0;
+    #####:  256:    capacity = 2;
+        -:  257:    loadFactor = 0;
+    #####:  258:    data = new EntriesList[capacity];
+    #####:  259:}
+    #####:  260:Value& HashTable::operator[](const Key& k) {
+    #####:  261:    if(this->Contains(k))
+    #####:  262:        return data[HashCalculation(k) % capacity].At(k);
+    #####:  263:    else {
+    #####:  264:        Value Default;
+    #####:  265:        this->Insert(k,Default);
+    #####:  266:        return data[HashCalculation(k) % capacity].At(k);
+    #####:  267:    }
+        -:  268:}
+    #####:  269:bool operator == (const HashTable& t1, const HashTable& t2) {
+    #####:  270:    if (t1.size!=t2.size)
+    #####:  271:        return false;
+        -:  272:    for (size_t i = 0 ; i< t1.capacity; i++)
+        -:  273:        if(t1.data[i]!=t2.data[i])
+    #####:  274:            return false;
+    #####:  275:    return true;
+    #####:  276:}
+    #####:  277:bool operator != (const HashTable& t1, const HashTable& t2) {
+    #####:  278:    return !(t1==t2);
+    #####:  279:}
+    #####:  280:Value& HashTable::At(const Key& k) {
+        -:  281:    if (this->Contains(k))
+    #####:  282:        return this->data[HashCalculation(k)%capacity].At(k);
+    #####:  283:    else throw new exception;
+        -:  284:}
+    #####:  285:HashTable:: HashTable() {
+    #####:  286:    capacity = 2;
+    #####:  287:    loadFactor = 0;
+    #####:  288:    size = 0;
+        -:  289:    data = new EntriesList[capacity];
+    #####:  290:}
+    #####:  291:
+    #####:  292:HashTable:: HashTable(size_t c): capacity(c) {
+    #####:  293:    data = new EntriesList[capacity];
+    #####:  294:}
+    #####:  295:
+        -:  296:HashTable&  HashTable :: operator = (const HashTable& t) {
+    #####:  297:    if (this != &t) {
+    #####:  298:        delete[] data;
+    #####:  299:        size = t.size;
+        -:  300:        capacity = t.capacity;
+    #####:  301:        loadFactor = t.loadFactor;
+    #####:  302:        data = new EntriesList[capacity];
+    #####:  303:        copy(t.data, t.data + t.capacity, data);
+    #####:  304:    }
+    #####:  305:    return *this;
+    #####:  306:}
+    #####:  307:HashTable::HashTable(const HashTable& t) {
+    #####:  308:    // cout<<"zashel v konstructor"<<endl;
+        -:  309:    size = t.size;
+    #####:  310:    capacity = t.capacity;
+        -:  311:    loadFactor = t.loadFactor;
+    #####:  312:    data = new EntriesList[capacity];
+        -:  313:    for(size_t i = 0; i < capacity ; i++) {
+    #####:  314:        data[i] = t.data[i];
+    #####:  315:    }
+    #####:  316:}
+    #####:  317:
+    #####:  318:HashTable:: ~HashTable() {
+    #####:  319:    delete []data;
+        -:  320:}
+    #####:  321:void HashTable:: Swap(HashTable& t ) {
+        -:  322:
+    #####:  323:    size_t tmp = size;
+    #####:  324:    size = t.size;
+    #####:  325:    t.size = tmp;
+    #####:  326:
+        -:  327:    tmp = capacity;
+    #####:  328:    capacity=t.capacity;
+    #####:  329:    t.capacity=tmp;
+    #####:  330:
+        -:  331:    tmp = loadFactor;
+    #####:  332:    loadFactor=t.loadFactor;
+    #####:  333:    t.loadFactor=tmp;
+    #####:  334:
+        -:  335:
+    #####:  336:    EntriesList* tmp1 = data;
+    #####:  337:    data = t.data;
+    #####:  338:    t.data=tmp1;
+        -:  339:
+        -:  340:}
+    #####:  341:
+    #####:  342:bool HashTable:: Insert(const Key& k, const Value& t) {
+    #####:  343:    if (Contains(k))
+        -:  344:        return false;
+    #####:  345:    size_t index = HashCalculation(k) % capacity;
+        -:  346:    if(!data[index].addElement(k,t))
+    #####:  347:        return false;
+    #####:  348:    size++;
+    #####:  349:    loadFactor=size/capacity;
+    #####:  350:    if (loadFactor >= HighLoadFactor)
+    #####:  351:        if (!ReHashing())
+    #####:  352:            return false;
+    #####:  353:    return true;
+    #####:  354:}
+    #####:  355:bool HashTable:: ReHashing() {
+    #####:  356:    HashTable tmp(capacity * HighLoadFactor); // tmp hashtable with more capacity
+    #####:  357:    for (size_t i = 0 ;i <capacity; i++) { // clear all lists in old and adding values tmp table
+    #####:  358:        while(!data[i].IsEmpty()) {
+        -:  359:            Node* ntmp = data[i].GetFirst();
+    #####:  360:            if (!tmp.Insert(ntmp->CurrentKey,ntmp->Current))
+    #####:  361:                return false;
+    #####:  362:            delete ntmp;
+    #####:  363:        }
+    #####:  364:
+    #####:  365:    }
+    #####:  366:    Swap(tmp);
+    #####:  367:
+        -:  368:    return true;
+        -:  369:}
+        -:  370:size_t HashTable::Size() const {
+    #####:  371:    return size;
+    #####:  372:}
+    #####:  373:bool HashTable ::Empty() const {
+    #####:  374:    return (!size) ? true : false;
+    #####:  375:}
+        -:  376:bool HashTable::Contains(const Key& k) const  {
+    #####:  377:    size_t index = HashCalculation(k) % capacity;
+        -:  378:    return data[index].Contains(k);
+    #####:  379:}
+    #####:  380:bool HashTable::Erase(const Key& k) {
+        -:  381:    size_t index = HashCalculation(k) % capacity;
+    #####:  382:    size--;
+    #####:  383:    return data[index].Erase(k);
+        -:  384:}
+    #####:  385:void HashTable::Show () {
+    #####:  386:    for (size_t i = 0; i<capacity;i++) {
+    #####:  387:        data[i].showList();
+        -:  388:        std::cout<<endl;
+    #####:  389:    }
+    #####:  390:}
+    #####:  391:
+    #####:  392:/*int main()
+        -:  393:{
+    #####:  394:    Value a,b,c,d,g;
+    #####:  395:    HashTable Z;
+    #####:  396:    Z.Insert("KAMA THE BULLET",a);
+    #####:  397:    Z.Insert("MAGA THE LEZGIN",b);
+        -:  398:    //cout<<"poka vse oke"<<endl;
+    #####:  399:    Z.Show();
+        -:  400:    HashTable X = Z;
+        -:  401:    HashTable* V = new HashTable;
+        -:  402:  //  cout<<"add"<<endl;
+        -:  403:    V->Insert("dasad",d);
+        -:  404:    HashTable* B = new HashTable;
+        -:  405:    *B = *V;
+        -:  406:    delete B;
+        -:  407:    delete V;
+        -:  408:  //  cout<<"heh"<<endl;
+        -:  409:    return 0;
+        -:  410:}*/

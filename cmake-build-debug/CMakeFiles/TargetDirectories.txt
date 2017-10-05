@@ -1,0 +1,3 @@
+/home/ulyssess/CLionProjects/untitled/16208_kutalev/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ulyssess/CLionProjects/untitled/16208_kutalev/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ulyssess/CLionProjects/untitled/16208_kutalev/cmake-build-debug/CMakeFiles/untitled.dir
