@@ -26,7 +26,7 @@ public:
         std::copy(t.yx,t.yx+age,yx);
         abc=t.abc;
     }
-    Value& operator = (Value & t) {
+    Value& operator = (const Value & t) {
         if (this!=&t) {
             delete [] yx;
             age=t.age;
@@ -126,12 +126,12 @@ TEST(equal,poni) {
     ASSERT_EQ(true,X1==Y1);
    X2.Insert("APPLE JACK",P);
     ASSERT_EQ(false,X2==X1);
-   // Y2=X2;
- /*   ASSERT_EQ(true,X2==Y2);
-    //HashTable<std::string,Value,&HashCalculation> Z = Y2;
-    //ASSERT_EQ(Y2==Z,true);
+    Y2=X2;
+    ASSERT_EQ(true,X2==Y2);
+    HashTable<std::string,Value,&HashCalculation> Z = Y2;
+    ASSERT_EQ(Y2==Z,true);
     X2.Erase("APPLE JACK");
-    ASSERT_EQ(false,X2==Y1); */
+    ASSERT_EQ(false,X2==Y1);
 }
 
 int main(int argc, char** argv) {

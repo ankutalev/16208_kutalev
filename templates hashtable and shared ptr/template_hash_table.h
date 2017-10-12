@@ -11,7 +11,7 @@ struct Node {
     friend bool operator == (const Node& a, const Node& b ) {
         return a.CurrentKey==b.CurrentKey;
     }
-    Node& operator = (Node& t) {
+    Node& operator = (const Node& t) {
         if(this!=&t) {
             Current = t.Current;
             CurrentKey = t.CurrentKey;
@@ -78,8 +78,8 @@ public:
             data = new std::list<Node<Key,Value> >[capacity];
             std::cout<<"privet mame"<<std::endl;
             for(size_t i = 0;i< capacity;i++)
-            //    data[i] = t.data[i];
-                std::copy(t.data[i].begin(), t.data[i].end(), data[i].begin());
+                data[i]=t.data[i];
+               // std::copy(t.data[i].begin(), t.data[i].end(), data[i].begin());
         }
         return *this;
     }
@@ -159,27 +159,26 @@ public:
     bool Empty() const { // true if empty
         return (size==0);
     }
+
     friend bool operator == (const HashTable& a,const HashTable& b) {
-        return !(a!=b);
+        if (a.capacity != b.capacity)
+            return false;
+        for (size_t i = 0; i < a.capacity; i++) {
+            for (typename std::list<Node<Key, Value>>::iterator it = a.data[i].begin(); it != a.data[i].end(); ++it)
+                if (!b.Contains((*it).CurrentKey))
+                    return false;
+
+        }
+        for (size_t i = 0; i < a.capacity; i++) {
+            for (typename std::list<Node<Key, Value>>::iterator it = b.data[i].begin(); it != b.data[i].end(); ++it)
+                if (!a.Contains((*it).CurrentKey))
+                    return false;
+
+        }
+        return true;
     }
     friend bool operator != (const HashTable& a,const HashTable& b ) {
-        if (a.size!=b.size)
-            return true;
-        size_t counter = 0;
-        for (size_t i = 0;i<a.capacity;i++) {
-            size_t list_size = a.data[i].size();
-            for(typename std::list<Node<Key,Value>>::iterator it = a.data[i].begin(); it!=a.data[i].end();++it) {
-                for(typename std::list<Node<Key,Value>>::iterator itt = b.data[i].begin(); itt!=b.data[i].end();++itt) {
-                    if (*it==*itt) {
-                        counter++;
-                        break;
-                    }
-                }
-            }
-            if (counter!=list_size)
-                return true;
-        }
-        return false;
+        return !(a==b);
     }
 private:
     size_t capacity = defaultCapacity;
