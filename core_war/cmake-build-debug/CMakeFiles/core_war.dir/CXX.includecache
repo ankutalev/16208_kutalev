@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/instructions.cpp
+instructions.hpp
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/instructions.hpp
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/instructions.hpp
+vector
+-
+iostream
+-
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/loader.cpp
+loader.h
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/loader.h
+ctime
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/ctime
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/loader.h
+warrior.hpp
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/warrior.hpp
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mov_command.cpp
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/warrior.cpp
+warrior.hpp
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/warrior.hpp
+
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/warrior.hpp
+fstream
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/fstream
+instructions.hpp
+/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/instructions.hpp
+

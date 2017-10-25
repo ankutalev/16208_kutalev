@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/core_war.dir/loader.cpp.o CMakeFiles/core_war.dir/mov_command.cpp.o CMakeFiles/core_war.dir/warrior.cpp.o CMakeFiles/core_war.dir/instructions.cpp.o  -o core_war 

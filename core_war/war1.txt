@@ -1,0 +1,6 @@
+;redcode
+;author Andrew Kutalev
+;date 19.10.2017
+;strategy nesu huynu i win
+;qwerty
+	 ORG        start
