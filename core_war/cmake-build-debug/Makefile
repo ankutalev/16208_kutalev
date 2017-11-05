@@ -123,6 +123,141 @@ core_war/fast:
 	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/build
 .PHONY : core_war/fast
 
+CircularBuffer.o: CircularBuffer.cpp.o
+
+.PHONY : CircularBuffer.o
+
+# target to build an object file
+CircularBuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/CircularBuffer.cpp.o
+.PHONY : CircularBuffer.cpp.o
+
+CircularBuffer.i: CircularBuffer.cpp.i
+
+.PHONY : CircularBuffer.i
+
+# target to preprocess a source file
+CircularBuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/CircularBuffer.cpp.i
+.PHONY : CircularBuffer.cpp.i
+
+CircularBuffer.s: CircularBuffer.cpp.s
+
+.PHONY : CircularBuffer.s
+
+# target to generate assembly for a file
+CircularBuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/CircularBuffer.cpp.s
+.PHONY : CircularBuffer.cpp.s
+
+add_command.o: add_command.cpp.o
+
+.PHONY : add_command.o
+
+# target to build an object file
+add_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/add_command.cpp.o
+.PHONY : add_command.cpp.o
+
+add_command.i: add_command.cpp.i
+
+.PHONY : add_command.i
+
+# target to preprocess a source file
+add_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/add_command.cpp.i
+.PHONY : add_command.cpp.i
+
+add_command.s: add_command.cpp.s
+
+.PHONY : add_command.s
+
+# target to generate assembly for a file
+add_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/add_command.cpp.s
+.PHONY : add_command.cpp.s
+
+dat_command.o: dat_command.cpp.o
+
+.PHONY : dat_command.o
+
+# target to build an object file
+dat_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/dat_command.cpp.o
+.PHONY : dat_command.cpp.o
+
+dat_command.i: dat_command.cpp.i
+
+.PHONY : dat_command.i
+
+# target to preprocess a source file
+dat_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/dat_command.cpp.i
+.PHONY : dat_command.cpp.i
+
+dat_command.s: dat_command.cpp.s
+
+.PHONY : dat_command.s
+
+# target to generate assembly for a file
+dat_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/dat_command.cpp.s
+.PHONY : dat_command.cpp.s
+
+div_command.o: div_command.cpp.o
+
+.PHONY : div_command.o
+
+# target to build an object file
+div_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/div_command.cpp.o
+.PHONY : div_command.cpp.o
+
+div_command.i: div_command.cpp.i
+
+.PHONY : div_command.i
+
+# target to preprocess a source file
+div_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/div_command.cpp.i
+.PHONY : div_command.cpp.i
+
+div_command.s: div_command.cpp.s
+
+.PHONY : div_command.s
+
+# target to generate assembly for a file
+div_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/div_command.cpp.s
+.PHONY : div_command.cpp.s
+
+factory.o: factory.cpp.o
+
+.PHONY : factory.o
+
+# target to build an object file
+factory.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/factory.cpp.o
+.PHONY : factory.cpp.o
+
+factory.i: factory.cpp.i
+
+.PHONY : factory.i
+
+# target to preprocess a source file
+factory.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/factory.cpp.i
+.PHONY : factory.cpp.i
+
+factory.s: factory.cpp.s
+
+.PHONY : factory.s
+
+# target to generate assembly for a file
+factory.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/factory.cpp.s
+.PHONY : factory.cpp.s
+
 instructions.o: instructions.cpp.o
 
 .PHONY : instructions.o
@@ -149,6 +284,87 @@ instructions.s: instructions.cpp.s
 instructions.cpp.s:
 	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/instructions.cpp.s
 .PHONY : instructions.cpp.s
+
+jmn_command.o: jmn_command.cpp.o
+
+.PHONY : jmn_command.o
+
+# target to build an object file
+jmn_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmn_command.cpp.o
+.PHONY : jmn_command.cpp.o
+
+jmn_command.i: jmn_command.cpp.i
+
+.PHONY : jmn_command.i
+
+# target to preprocess a source file
+jmn_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmn_command.cpp.i
+.PHONY : jmn_command.cpp.i
+
+jmn_command.s: jmn_command.cpp.s
+
+.PHONY : jmn_command.s
+
+# target to generate assembly for a file
+jmn_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmn_command.cpp.s
+.PHONY : jmn_command.cpp.s
+
+jmp_command.o: jmp_command.cpp.o
+
+.PHONY : jmp_command.o
+
+# target to build an object file
+jmp_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmp_command.cpp.o
+.PHONY : jmp_command.cpp.o
+
+jmp_command.i: jmp_command.cpp.i
+
+.PHONY : jmp_command.i
+
+# target to preprocess a source file
+jmp_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmp_command.cpp.i
+.PHONY : jmp_command.cpp.i
+
+jmp_command.s: jmp_command.cpp.s
+
+.PHONY : jmp_command.s
+
+# target to generate assembly for a file
+jmp_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmp_command.cpp.s
+.PHONY : jmp_command.cpp.s
+
+jmz_command.o: jmz_command.cpp.o
+
+.PHONY : jmz_command.o
+
+# target to build an object file
+jmz_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmz_command.cpp.o
+.PHONY : jmz_command.cpp.o
+
+jmz_command.i: jmz_command.cpp.i
+
+.PHONY : jmz_command.i
+
+# target to preprocess a source file
+jmz_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmz_command.cpp.i
+.PHONY : jmz_command.cpp.i
+
+jmz_command.s: jmz_command.cpp.s
+
+.PHONY : jmz_command.s
+
+# target to generate assembly for a file
+jmz_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmz_command.cpp.s
+.PHONY : jmz_command.cpp.s
 
 loader.o: loader.cpp.o
 
@@ -204,6 +420,195 @@ mov_command.cpp.s:
 	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/mov_command.cpp.s
 .PHONY : mov_command.cpp.s
 
+mul_command.o: mul_command.cpp.o
+
+.PHONY : mul_command.o
+
+# target to build an object file
+mul_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/mul_command.cpp.o
+.PHONY : mul_command.cpp.o
+
+mul_command.i: mul_command.cpp.i
+
+.PHONY : mul_command.i
+
+# target to preprocess a source file
+mul_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/mul_command.cpp.i
+.PHONY : mul_command.cpp.i
+
+mul_command.s: mul_command.cpp.s
+
+.PHONY : mul_command.s
+
+# target to generate assembly for a file
+mul_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/mul_command.cpp.s
+.PHONY : mul_command.cpp.s
+
+nop_command.o: nop_command.cpp.o
+
+.PHONY : nop_command.o
+
+# target to build an object file
+nop_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/nop_command.cpp.o
+.PHONY : nop_command.cpp.o
+
+nop_command.i: nop_command.cpp.i
+
+.PHONY : nop_command.i
+
+# target to preprocess a source file
+nop_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/nop_command.cpp.i
+.PHONY : nop_command.cpp.i
+
+nop_command.s: nop_command.cpp.s
+
+.PHONY : nop_command.s
+
+# target to generate assembly for a file
+nop_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/nop_command.cpp.s
+.PHONY : nop_command.cpp.s
+
+seq_command.o: seq_command.cpp.o
+
+.PHONY : seq_command.o
+
+# target to build an object file
+seq_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/seq_command.cpp.o
+.PHONY : seq_command.cpp.o
+
+seq_command.i: seq_command.cpp.i
+
+.PHONY : seq_command.i
+
+# target to preprocess a source file
+seq_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/seq_command.cpp.i
+.PHONY : seq_command.cpp.i
+
+seq_command.s: seq_command.cpp.s
+
+.PHONY : seq_command.s
+
+# target to generate assembly for a file
+seq_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/seq_command.cpp.s
+.PHONY : seq_command.cpp.s
+
+slt_command.o: slt_command.cpp.o
+
+.PHONY : slt_command.o
+
+# target to build an object file
+slt_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/slt_command.cpp.o
+.PHONY : slt_command.cpp.o
+
+slt_command.i: slt_command.cpp.i
+
+.PHONY : slt_command.i
+
+# target to preprocess a source file
+slt_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/slt_command.cpp.i
+.PHONY : slt_command.cpp.i
+
+slt_command.s: slt_command.cpp.s
+
+.PHONY : slt_command.s
+
+# target to generate assembly for a file
+slt_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/slt_command.cpp.s
+.PHONY : slt_command.cpp.s
+
+sne_command.o: sne_command.cpp.o
+
+.PHONY : sne_command.o
+
+# target to build an object file
+sne_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sne_command.cpp.o
+.PHONY : sne_command.cpp.o
+
+sne_command.i: sne_command.cpp.i
+
+.PHONY : sne_command.i
+
+# target to preprocess a source file
+sne_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sne_command.cpp.i
+.PHONY : sne_command.cpp.i
+
+sne_command.s: sne_command.cpp.s
+
+.PHONY : sne_command.s
+
+# target to generate assembly for a file
+sne_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sne_command.cpp.s
+.PHONY : sne_command.cpp.s
+
+spl_command.o: spl_command.cpp.o
+
+.PHONY : spl_command.o
+
+# target to build an object file
+spl_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/spl_command.cpp.o
+.PHONY : spl_command.cpp.o
+
+spl_command.i: spl_command.cpp.i
+
+.PHONY : spl_command.i
+
+# target to preprocess a source file
+spl_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/spl_command.cpp.i
+.PHONY : spl_command.cpp.i
+
+spl_command.s: spl_command.cpp.s
+
+.PHONY : spl_command.s
+
+# target to generate assembly for a file
+spl_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/spl_command.cpp.s
+.PHONY : spl_command.cpp.s
+
+sub_command.o: sub_command.cpp.o
+
+.PHONY : sub_command.o
+
+# target to build an object file
+sub_command.cpp.o:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sub_command.cpp.o
+.PHONY : sub_command.cpp.o
+
+sub_command.i: sub_command.cpp.i
+
+.PHONY : sub_command.i
+
+# target to preprocess a source file
+sub_command.cpp.i:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sub_command.cpp.i
+.PHONY : sub_command.cpp.i
+
+sub_command.s: sub_command.cpp.s
+
+.PHONY : sub_command.s
+
+# target to generate assembly for a file
+sub_command.cpp.s:
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sub_command.cpp.s
+.PHONY : sub_command.cpp.s
+
 warrior.o: warrior.cpp.o
 
 .PHONY : warrior.o
@@ -240,15 +645,60 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... core_war"
+	@echo "... CircularBuffer.o"
+	@echo "... CircularBuffer.i"
+	@echo "... CircularBuffer.s"
+	@echo "... add_command.o"
+	@echo "... add_command.i"
+	@echo "... add_command.s"
+	@echo "... dat_command.o"
+	@echo "... dat_command.i"
+	@echo "... dat_command.s"
+	@echo "... div_command.o"
+	@echo "... div_command.i"
+	@echo "... div_command.s"
+	@echo "... factory.o"
+	@echo "... factory.i"
+	@echo "... factory.s"
 	@echo "... instructions.o"
 	@echo "... instructions.i"
 	@echo "... instructions.s"
+	@echo "... jmn_command.o"
+	@echo "... jmn_command.i"
+	@echo "... jmn_command.s"
+	@echo "... jmp_command.o"
+	@echo "... jmp_command.i"
+	@echo "... jmp_command.s"
+	@echo "... jmz_command.o"
+	@echo "... jmz_command.i"
+	@echo "... jmz_command.s"
 	@echo "... loader.o"
 	@echo "... loader.i"
 	@echo "... loader.s"
 	@echo "... mov_command.o"
 	@echo "... mov_command.i"
 	@echo "... mov_command.s"
+	@echo "... mul_command.o"
+	@echo "... mul_command.i"
+	@echo "... mul_command.s"
+	@echo "... nop_command.o"
+	@echo "... nop_command.i"
+	@echo "... nop_command.s"
+	@echo "... seq_command.o"
+	@echo "... seq_command.i"
+	@echo "... seq_command.s"
+	@echo "... slt_command.o"
+	@echo "... slt_command.i"
+	@echo "... slt_command.s"
+	@echo "... sne_command.o"
+	@echo "... sne_command.i"
+	@echo "... sne_command.s"
+	@echo "... spl_command.o"
+	@echo "... spl_command.i"
+	@echo "... spl_command.s"
+	@echo "... sub_command.o"
+	@echo "... sub_command.i"
+	@echo "... sub_command.s"
 	@echo "... warrior.o"
 	@echo "... warrior.i"
 	@echo "... warrior.s"

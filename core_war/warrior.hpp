@@ -17,6 +17,7 @@ public:
         std::copy(in.begin(),in.end(),Instructions.begin());
     }
 private:
+    int FlowCounter=1;
     std::vector<Instruction*> Instructions;
     std::vector<std::string> PseudoInstructions;
     std::vector<std::string> Information;

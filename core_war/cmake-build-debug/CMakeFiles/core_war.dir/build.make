@@ -153,12 +153,387 @@ CMakeFiles/core_war.dir/instructions.cpp.o.provides: CMakeFiles/core_war.dir/ins
 CMakeFiles/core_war.dir/instructions.cpp.o.provides.build: CMakeFiles/core_war.dir/instructions.cpp.o
 
 
+CMakeFiles/core_war.dir/CircularBuffer.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/CircularBuffer.cpp.o: ../CircularBuffer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/core_war.dir/CircularBuffer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/CircularBuffer.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/CircularBuffer.cpp
+
+CMakeFiles/core_war.dir/CircularBuffer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/CircularBuffer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/CircularBuffer.cpp > CMakeFiles/core_war.dir/CircularBuffer.cpp.i
+
+CMakeFiles/core_war.dir/CircularBuffer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/CircularBuffer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/CircularBuffer.cpp -o CMakeFiles/core_war.dir/CircularBuffer.cpp.s
+
+CMakeFiles/core_war.dir/CircularBuffer.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/CircularBuffer.cpp.o.requires
+
+CMakeFiles/core_war.dir/CircularBuffer.cpp.o.provides: CMakeFiles/core_war.dir/CircularBuffer.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/CircularBuffer.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/CircularBuffer.cpp.o.provides
+
+CMakeFiles/core_war.dir/CircularBuffer.cpp.o.provides.build: CMakeFiles/core_war.dir/CircularBuffer.cpp.o
+
+
+CMakeFiles/core_war.dir/add_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/add_command.cpp.o: ../add_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/core_war.dir/add_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/add_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/add_command.cpp
+
+CMakeFiles/core_war.dir/add_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/add_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/add_command.cpp > CMakeFiles/core_war.dir/add_command.cpp.i
+
+CMakeFiles/core_war.dir/add_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/add_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/add_command.cpp -o CMakeFiles/core_war.dir/add_command.cpp.s
+
+CMakeFiles/core_war.dir/add_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/add_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/add_command.cpp.o.provides: CMakeFiles/core_war.dir/add_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/add_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/add_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/add_command.cpp.o.provides.build: CMakeFiles/core_war.dir/add_command.cpp.o
+
+
+CMakeFiles/core_war.dir/jmp_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/jmp_command.cpp.o: ../jmp_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/core_war.dir/jmp_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/jmp_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmp_command.cpp
+
+CMakeFiles/core_war.dir/jmp_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/jmp_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmp_command.cpp > CMakeFiles/core_war.dir/jmp_command.cpp.i
+
+CMakeFiles/core_war.dir/jmp_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/jmp_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmp_command.cpp -o CMakeFiles/core_war.dir/jmp_command.cpp.s
+
+CMakeFiles/core_war.dir/jmp_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/jmp_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/jmp_command.cpp.o.provides: CMakeFiles/core_war.dir/jmp_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmp_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/jmp_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/jmp_command.cpp.o.provides.build: CMakeFiles/core_war.dir/jmp_command.cpp.o
+
+
+CMakeFiles/core_war.dir/factory.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/factory.cpp.o: ../factory.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/core_war.dir/factory.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/factory.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/factory.cpp
+
+CMakeFiles/core_war.dir/factory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/factory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/factory.cpp > CMakeFiles/core_war.dir/factory.cpp.i
+
+CMakeFiles/core_war.dir/factory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/factory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/factory.cpp -o CMakeFiles/core_war.dir/factory.cpp.s
+
+CMakeFiles/core_war.dir/factory.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/factory.cpp.o.requires
+
+CMakeFiles/core_war.dir/factory.cpp.o.provides: CMakeFiles/core_war.dir/factory.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/factory.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/factory.cpp.o.provides
+
+CMakeFiles/core_war.dir/factory.cpp.o.provides.build: CMakeFiles/core_war.dir/factory.cpp.o
+
+
+CMakeFiles/core_war.dir/dat_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/dat_command.cpp.o: ../dat_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/core_war.dir/dat_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/dat_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/dat_command.cpp
+
+CMakeFiles/core_war.dir/dat_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/dat_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/dat_command.cpp > CMakeFiles/core_war.dir/dat_command.cpp.i
+
+CMakeFiles/core_war.dir/dat_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/dat_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/dat_command.cpp -o CMakeFiles/core_war.dir/dat_command.cpp.s
+
+CMakeFiles/core_war.dir/dat_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/dat_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/dat_command.cpp.o.provides: CMakeFiles/core_war.dir/dat_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/dat_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/dat_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/dat_command.cpp.o.provides.build: CMakeFiles/core_war.dir/dat_command.cpp.o
+
+
+CMakeFiles/core_war.dir/sub_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/sub_command.cpp.o: ../sub_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/core_war.dir/sub_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/sub_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sub_command.cpp
+
+CMakeFiles/core_war.dir/sub_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/sub_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sub_command.cpp > CMakeFiles/core_war.dir/sub_command.cpp.i
+
+CMakeFiles/core_war.dir/sub_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/sub_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sub_command.cpp -o CMakeFiles/core_war.dir/sub_command.cpp.s
+
+CMakeFiles/core_war.dir/sub_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/sub_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/sub_command.cpp.o.provides: CMakeFiles/core_war.dir/sub_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sub_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/sub_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/sub_command.cpp.o.provides.build: CMakeFiles/core_war.dir/sub_command.cpp.o
+
+
+CMakeFiles/core_war.dir/mul_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/mul_command.cpp.o: ../mul_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/core_war.dir/mul_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/mul_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mul_command.cpp
+
+CMakeFiles/core_war.dir/mul_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/mul_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mul_command.cpp > CMakeFiles/core_war.dir/mul_command.cpp.i
+
+CMakeFiles/core_war.dir/mul_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/mul_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mul_command.cpp -o CMakeFiles/core_war.dir/mul_command.cpp.s
+
+CMakeFiles/core_war.dir/mul_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/mul_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/mul_command.cpp.o.provides: CMakeFiles/core_war.dir/mul_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/mul_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/mul_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/mul_command.cpp.o.provides.build: CMakeFiles/core_war.dir/mul_command.cpp.o
+
+
+CMakeFiles/core_war.dir/div_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/div_command.cpp.o: ../div_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/core_war.dir/div_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/div_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/div_command.cpp
+
+CMakeFiles/core_war.dir/div_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/div_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/div_command.cpp > CMakeFiles/core_war.dir/div_command.cpp.i
+
+CMakeFiles/core_war.dir/div_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/div_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/div_command.cpp -o CMakeFiles/core_war.dir/div_command.cpp.s
+
+CMakeFiles/core_war.dir/div_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/div_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/div_command.cpp.o.provides: CMakeFiles/core_war.dir/div_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/div_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/div_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/div_command.cpp.o.provides.build: CMakeFiles/core_war.dir/div_command.cpp.o
+
+
+CMakeFiles/core_war.dir/jmz_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/jmz_command.cpp.o: ../jmz_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/core_war.dir/jmz_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/jmz_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmz_command.cpp
+
+CMakeFiles/core_war.dir/jmz_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/jmz_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmz_command.cpp > CMakeFiles/core_war.dir/jmz_command.cpp.i
+
+CMakeFiles/core_war.dir/jmz_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/jmz_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmz_command.cpp -o CMakeFiles/core_war.dir/jmz_command.cpp.s
+
+CMakeFiles/core_war.dir/jmz_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/jmz_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/jmz_command.cpp.o.provides: CMakeFiles/core_war.dir/jmz_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmz_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/jmz_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/jmz_command.cpp.o.provides.build: CMakeFiles/core_war.dir/jmz_command.cpp.o
+
+
+CMakeFiles/core_war.dir/spl_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/spl_command.cpp.o: ../spl_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/core_war.dir/spl_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/spl_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/spl_command.cpp
+
+CMakeFiles/core_war.dir/spl_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/spl_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/spl_command.cpp > CMakeFiles/core_war.dir/spl_command.cpp.i
+
+CMakeFiles/core_war.dir/spl_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/spl_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/spl_command.cpp -o CMakeFiles/core_war.dir/spl_command.cpp.s
+
+CMakeFiles/core_war.dir/spl_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/spl_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/spl_command.cpp.o.provides: CMakeFiles/core_war.dir/spl_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/spl_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/spl_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/spl_command.cpp.o.provides.build: CMakeFiles/core_war.dir/spl_command.cpp.o
+
+
+CMakeFiles/core_war.dir/seq_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/seq_command.cpp.o: ../seq_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/core_war.dir/seq_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/seq_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/seq_command.cpp
+
+CMakeFiles/core_war.dir/seq_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/seq_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/seq_command.cpp > CMakeFiles/core_war.dir/seq_command.cpp.i
+
+CMakeFiles/core_war.dir/seq_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/seq_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/seq_command.cpp -o CMakeFiles/core_war.dir/seq_command.cpp.s
+
+CMakeFiles/core_war.dir/seq_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/seq_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/seq_command.cpp.o.provides: CMakeFiles/core_war.dir/seq_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/seq_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/seq_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/seq_command.cpp.o.provides.build: CMakeFiles/core_war.dir/seq_command.cpp.o
+
+
+CMakeFiles/core_war.dir/jmn_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/jmn_command.cpp.o: ../jmn_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/core_war.dir/jmn_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/jmn_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmn_command.cpp
+
+CMakeFiles/core_war.dir/jmn_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/jmn_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmn_command.cpp > CMakeFiles/core_war.dir/jmn_command.cpp.i
+
+CMakeFiles/core_war.dir/jmn_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/jmn_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmn_command.cpp -o CMakeFiles/core_war.dir/jmn_command.cpp.s
+
+CMakeFiles/core_war.dir/jmn_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/jmn_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/jmn_command.cpp.o.provides: CMakeFiles/core_war.dir/jmn_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/jmn_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/jmn_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/jmn_command.cpp.o.provides.build: CMakeFiles/core_war.dir/jmn_command.cpp.o
+
+
+CMakeFiles/core_war.dir/sne_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/sne_command.cpp.o: ../sne_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/core_war.dir/sne_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/sne_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sne_command.cpp
+
+CMakeFiles/core_war.dir/sne_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/sne_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sne_command.cpp > CMakeFiles/core_war.dir/sne_command.cpp.i
+
+CMakeFiles/core_war.dir/sne_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/sne_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sne_command.cpp -o CMakeFiles/core_war.dir/sne_command.cpp.s
+
+CMakeFiles/core_war.dir/sne_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/sne_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/sne_command.cpp.o.provides: CMakeFiles/core_war.dir/sne_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/sne_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/sne_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/sne_command.cpp.o.provides.build: CMakeFiles/core_war.dir/sne_command.cpp.o
+
+
+CMakeFiles/core_war.dir/slt_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/slt_command.cpp.o: ../slt_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/core_war.dir/slt_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/slt_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/slt_command.cpp
+
+CMakeFiles/core_war.dir/slt_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/slt_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/slt_command.cpp > CMakeFiles/core_war.dir/slt_command.cpp.i
+
+CMakeFiles/core_war.dir/slt_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/slt_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/slt_command.cpp -o CMakeFiles/core_war.dir/slt_command.cpp.s
+
+CMakeFiles/core_war.dir/slt_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/slt_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/slt_command.cpp.o.provides: CMakeFiles/core_war.dir/slt_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/slt_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/slt_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/slt_command.cpp.o.provides.build: CMakeFiles/core_war.dir/slt_command.cpp.o
+
+
+CMakeFiles/core_war.dir/nop_command.cpp.o: CMakeFiles/core_war.dir/flags.make
+CMakeFiles/core_war.dir/nop_command.cpp.o: ../nop_command.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/core_war.dir/nop_command.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core_war.dir/nop_command.cpp.o -c /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/nop_command.cpp
+
+CMakeFiles/core_war.dir/nop_command.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core_war.dir/nop_command.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/nop_command.cpp > CMakeFiles/core_war.dir/nop_command.cpp.i
+
+CMakeFiles/core_war.dir/nop_command.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core_war.dir/nop_command.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/nop_command.cpp -o CMakeFiles/core_war.dir/nop_command.cpp.s
+
+CMakeFiles/core_war.dir/nop_command.cpp.o.requires:
+
+.PHONY : CMakeFiles/core_war.dir/nop_command.cpp.o.requires
+
+CMakeFiles/core_war.dir/nop_command.cpp.o.provides: CMakeFiles/core_war.dir/nop_command.cpp.o.requires
+	$(MAKE) -f CMakeFiles/core_war.dir/build.make CMakeFiles/core_war.dir/nop_command.cpp.o.provides.build
+.PHONY : CMakeFiles/core_war.dir/nop_command.cpp.o.provides
+
+CMakeFiles/core_war.dir/nop_command.cpp.o.provides.build: CMakeFiles/core_war.dir/nop_command.cpp.o
+
+
 # Object files for target core_war
 core_war_OBJECTS = \
 "CMakeFiles/core_war.dir/loader.cpp.o" \
 "CMakeFiles/core_war.dir/mov_command.cpp.o" \
 "CMakeFiles/core_war.dir/warrior.cpp.o" \
-"CMakeFiles/core_war.dir/instructions.cpp.o"
+"CMakeFiles/core_war.dir/instructions.cpp.o" \
+"CMakeFiles/core_war.dir/CircularBuffer.cpp.o" \
+"CMakeFiles/core_war.dir/add_command.cpp.o" \
+"CMakeFiles/core_war.dir/jmp_command.cpp.o" \
+"CMakeFiles/core_war.dir/factory.cpp.o" \
+"CMakeFiles/core_war.dir/dat_command.cpp.o" \
+"CMakeFiles/core_war.dir/sub_command.cpp.o" \
+"CMakeFiles/core_war.dir/mul_command.cpp.o" \
+"CMakeFiles/core_war.dir/div_command.cpp.o" \
+"CMakeFiles/core_war.dir/jmz_command.cpp.o" \
+"CMakeFiles/core_war.dir/spl_command.cpp.o" \
+"CMakeFiles/core_war.dir/seq_command.cpp.o" \
+"CMakeFiles/core_war.dir/jmn_command.cpp.o" \
+"CMakeFiles/core_war.dir/sne_command.cpp.o" \
+"CMakeFiles/core_war.dir/slt_command.cpp.o" \
+"CMakeFiles/core_war.dir/nop_command.cpp.o"
 
 # External object files for target core_war
 core_war_EXTERNAL_OBJECTS =
@@ -167,9 +542,24 @@ core_war: CMakeFiles/core_war.dir/loader.cpp.o
 core_war: CMakeFiles/core_war.dir/mov_command.cpp.o
 core_war: CMakeFiles/core_war.dir/warrior.cpp.o
 core_war: CMakeFiles/core_war.dir/instructions.cpp.o
+core_war: CMakeFiles/core_war.dir/CircularBuffer.cpp.o
+core_war: CMakeFiles/core_war.dir/add_command.cpp.o
+core_war: CMakeFiles/core_war.dir/jmp_command.cpp.o
+core_war: CMakeFiles/core_war.dir/factory.cpp.o
+core_war: CMakeFiles/core_war.dir/dat_command.cpp.o
+core_war: CMakeFiles/core_war.dir/sub_command.cpp.o
+core_war: CMakeFiles/core_war.dir/mul_command.cpp.o
+core_war: CMakeFiles/core_war.dir/div_command.cpp.o
+core_war: CMakeFiles/core_war.dir/jmz_command.cpp.o
+core_war: CMakeFiles/core_war.dir/spl_command.cpp.o
+core_war: CMakeFiles/core_war.dir/seq_command.cpp.o
+core_war: CMakeFiles/core_war.dir/jmn_command.cpp.o
+core_war: CMakeFiles/core_war.dir/sne_command.cpp.o
+core_war: CMakeFiles/core_war.dir/slt_command.cpp.o
+core_war: CMakeFiles/core_war.dir/nop_command.cpp.o
 core_war: CMakeFiles/core_war.dir/build.make
 core_war: CMakeFiles/core_war.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable core_war"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable core_war"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/core_war.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -181,6 +571,21 @@ CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/loader.cpp.o.requires
 CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/mov_command.cpp.o.requires
 CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/warrior.cpp.o.requires
 CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/instructions.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/CircularBuffer.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/add_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/jmp_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/factory.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/dat_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/sub_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/mul_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/div_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/jmz_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/spl_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/seq_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/jmn_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/sne_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/slt_command.cpp.o.requires
+CMakeFiles/core_war.dir/requires: CMakeFiles/core_war.dir/nop_command.cpp.o.requires
 
 .PHONY : CMakeFiles/core_war.dir/requires
 

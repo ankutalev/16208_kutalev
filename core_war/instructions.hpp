@@ -4,12 +4,14 @@
 
 #ifndef CORE_WAR_INSTRUCTIONS_HPP
 #define CORE_WAR_INSTRUCTIONS_HPP
-
 #include <vector>
 #include <iostream>
+#include "CircularBuffer.hpp"
+
 struct zaglushka {
     int WNumber;
-    int ComAddess;
+    size_t ComAddess;
+    int* FlowCounter;
 };
 enum class Mods :int  { Lattice = 1, Dollar = 2, Dog = 3, Star = 4, Less = 5, More = 6, Open =7, Close =8, Not = 0};
 enum class Modifiers :int   { A = 1, B =2, AB=3, BA=4, F=5, X=6, I=6, Not=0};
@@ -25,7 +27,6 @@ enum class Opcodes : int {
     JMZ = 8,
     JMN = 9,
     DJN = 10,
-    CMP = 11,
     SEQ = 12,
     SNE = 13,
     SLT = 14,
@@ -35,6 +36,7 @@ enum class Opcodes : int {
 };
 
 class Instruction {
+   // friend class Add_command;
 public:
     Instruction (Opcodes a,Modifiers b, Mods c, Mods d, int e, int f) : Body(a), OpcodeMod(b),
                                                                         AOperandMod(c),
@@ -42,7 +44,7 @@ public:
                                                                         AOperand(e),
                                                                         BOperand(f) {}
     Instruction() {}
-    virtual bool Execution(std::vector<Instruction*>&  core,size_t in) { std::cout<< "gde ya...";}
+    virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator){}//std::cout<<"gde ya...";}
     virtual bool GetMARSInstruction(std::ifstream &) {};
     virtual bool IsItCorrect(std::string &) {};
     size_t GettingCode(unsigned CoreSize) {
@@ -51,8 +53,59 @@ public:
                       static_cast<int>(OpcodeMod)*10000000000 + static_cast<int>(Body)*100000000000;
         return Code;
     }
+    void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,size_t size) {
+         Destination = BOperand;
+         Source = AOperand;
+        switch (BOperandMod) {
+            case (Mods::Lattice):
+                Destination = BOperand;
+                break;
+            case (Mods::Dog):
+                Destination = Core[(BOperand + (*it).Address)%size]->BOperand;
+                break;
+            case (Mods::More):
+                Destination = Core[(BOperand + (*it).Address)%size]->BOperand+1;
+                break;
+            case (Mods::Less):
+                Destination = Core[(BOperand + (*it).Address)%size+1]->BOperand;
+                break;
+            case (Mods::Dollar):
+            case (Mods :: Not):
+            default:
+                Destination = (Destination +(*it).Address);
+                break;
+        }
+        switch (AOperandMod) {
+            case (Mods::Lattice):
+                Source = AOperand;
+                break;
+            case (Mods::Star):
+                Source = Core[(AOperand + (*it).Address)%size]->AOperand;
+                break;
+            case (Mods::Close):
+                Source = Core[(AOperand + (*it).Address)%size]->AOperand+1;
+                break;
+            case (Mods::Open):
+                Source = Core[(AOperand + (*it).Address)%size+1]->AOperand;
+                break;
+            case (Mods::Dollar):
+            case (Mods :: Not):
+            default:
+                Source = (Source +(*it).Address);
+                break;
+        }
+        Source%=size;
+        Destination%=size;
+    }
+    virtual Instruction* Clone() {
+        return new Instruction(*this);
+    }
     Instruction& operator = (const Instruction& in) {
         if(this!= &in) {
+            /*delete this; // hahahahahaha kept your waiting huh
+            if (in.Body == Opcodes::ADD)
+            Instruction* tmp = new Add_command;
+            *tmp = in;*/
             Body = in.Body;
             AOperandMod = in.AOperandMod;
             BOperandMod = in.BOperandMod;
@@ -62,50 +115,16 @@ public:
         }
         return *this;
     }
-
-protected:
     Opcodes Body;
     Modifiers OpcodeMod;
     Mods AOperandMod;
     Mods BOperandMod;
     int AOperand;
     int BOperand;
-//    size_t CoreLocation;
-};
-class Mov_command : public Instruction {
-public:
-    Mov_command() {}
-    Mov_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
-            Body = a;
-            OpcodeMod = b;
-            AOperandMod = c;
-            BOperandMod = d;
-            AOperand = e;
-            BOperand =f;
-        }
-    bool Execution (std::vector<Instruction*>& Core, size_t Address) override {
-         size_t size = Core.size();
-    size_t Destination = BOperand;
-    size_t Source = AOperand;
-   /* switch (BOperandMod) { //to do for other operand mods (not only # and $)
-        case (Mods::Dollar):
-            Destination = (Destination +Address)%size;
-        case (Mods::Lattice):
-    }*/
-    if (BOperandMod==Mods::Dollar)
-        Destination = (Destination + Address)%size;
-    if(AOperandMod==Mods::Dollar)
-        Source = (Source+Address)%size;
-         Core[Destination]=Core[Source];
-         return true;
-    }
-private:
-    int t;
+protected:
+    int Source;
+    int Destination;
 };
 
-class Dat_command: public Instruction {
-public:
-    bool Execution (std::vector<Instruction*>&, size_t) override;
-};
 
 #endif //CORE_WAR_INSTRUCTIONS_HPP

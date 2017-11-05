@@ -84,6 +84,27 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/CircularBuffer.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/CircularBuffer.hpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/add_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/dat_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/div_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/factory.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/factory.hpp">
+			<Option target="core_war"/>
+		</Unit>
 		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/heder.h">
 			<Option target="core_war"/>
 		</Unit>
@@ -93,6 +114,15 @@
 		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/instructions.hpp">
 			<Option target="core_war"/>
 		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmn_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmp_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/jmz_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
 		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/loader.cpp">
 			<Option target="core_war"/>
 		</Unit>
@@ -100,6 +130,27 @@
 			<Option target="core_war"/>
 		</Unit>
 		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mov_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/mul_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/nop_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/seq_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/slt_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sne_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/spl_command.cpp">
+			<Option target="core_war"/>
+		</Unit>
+		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/sub_command.cpp">
 			<Option target="core_war"/>
 		</Unit>
 		<Unit filename="/home/ulyssess/CLionProjects/obertka_repo/16208_kutalev/core_war/warrior.cpp">
