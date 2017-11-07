@@ -99,6 +99,8 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
 int main () {
     srand(time(0));
     MARS X;
+//    X.SetConfiguration("config.redcode");
+  // std:: vector<Warrior> Y;
     /*Instruction Imp(Opcodes:: MOV,Modifiers:: Not,Mods:: Not, Mods:: Not, 0,1);
 
     std::vector<Instruction> q;
@@ -115,7 +117,7 @@ int main () {
     Imp->BOperand = 1;
     Imp->BOperandMod = Mods::Dollar;
     Imp->AOperandMod = Mods::Dollar;
-    Imp->OpcodeMod = Modifiers ::Not;
+    Imp->OpcodeMod = Modifiers ::I;
     std::vector<Instruction*> q;
     q.push_back(Imp);
     Warrior IMP (q);

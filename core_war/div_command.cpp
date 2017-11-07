@@ -26,7 +26,40 @@ public:
             Queue.DeleteCurrent(it);
             return true;
         }
-        (*it).Address = ((*it).Address+1)%size;
+        if (!Core[Source]->AOperand&& (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
+            Queue.DeleteCurrent(it);
+            return true;
+        }
+        if (!Core[Source]->BOperand&& (OpcodeMod!= Modifiers::AB) && (OpcodeMod!=Modifiers::A)) {
+            Queue.DeleteCurrent(it);
+            return true;
+        }
+
+        switch (OpcodeMod) {
+            case (Modifiers::A) :
+                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->AOperand;
+                break;
+            case (Modifiers::AB):
+                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->AOperand;
+                break;
+            case (Modifiers::B) :
+                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->BOperand;
+                break;
+            case (Modifiers::BA):
+                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->BOperand;
+                break;
+            case (Modifiers ::I):
+            case (Modifiers::F):
+                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->AOperand;
+                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->BOperand;
+                break;
+            case (Modifiers::X):
+                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->AOperand;
+                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->BOperand;
+                break;
+
+        }
+        ((*it).Address++)%size;
         return true;
     }
     Div_command* Clone() override {

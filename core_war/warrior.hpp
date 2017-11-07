@@ -12,7 +12,7 @@ class Warrior {
     friend class MARS;
 public:
     void Born(char[]);
-    Warrior(const std::vector<Instruction*>& in) {
+   explicit Warrior(const std::vector<Instruction*>& in) {
         Instructions.resize(in.size());
         std::copy(in.begin(),in.end(),Instructions.begin());
     }

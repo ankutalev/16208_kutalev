@@ -21,7 +21,7 @@ public:
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
         size_t size = Core.size();
         SetSD(Core,it,size);
-        (*it).Address = Source;
+        (*it).Address = Core[Source]->AOperand;
         return true;
     }
     Jmp_command* Clone() override {

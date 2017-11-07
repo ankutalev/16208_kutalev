@@ -17,7 +17,7 @@ public:
   //  void Battle (std::vector <zaglushka>&,size_t);
     void Battle ();
 private:
-    size_t size = 100;
+    size_t size = 10;
     size_t TieCycles =  20;
     Instruction Initial = Instruction(Opcodes::DAT,Modifiers::F,Mods::Lattice,Mods::Lattice,0,0);
     size_t MaxLength = 300;

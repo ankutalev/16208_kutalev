@@ -24,7 +24,7 @@ public:
         SetSD(Core,it,size);
         if( (*(*it).FlowCounter) < Queue.FlowCounter ) {
             Flow tmp = (*it);
-            tmp.Address = Source;
+            tmp.Address = Core[Source]->AOperand;
             Queue.InsertPrev(it, tmp);
             return true;
         }

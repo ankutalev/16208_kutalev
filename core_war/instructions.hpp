@@ -14,7 +14,7 @@ struct zaglushka {
     int* FlowCounter;
 };
 enum class Mods :int  { Lattice = 1, Dollar = 2, Dog = 3, Star = 4, Less = 5, More = 6, Open =7, Close =8, Not = 0};
-enum class Modifiers :int   { A = 1, B =2, AB=3, BA=4, F=5, X=6, I=6, Not=0};
+enum class Modifiers :int   { A = 1, B =2, AB=3, BA=4, F=5, X=6, I=7, Not=0};
 enum class Opcodes : int {
     DAT = 0,
     MOV = 1,
@@ -54,11 +54,9 @@ public:
         return Code;
     }
     void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,size_t size) {
-         Destination = BOperand;
-         Source = AOperand;
         switch (BOperandMod) {
             case (Mods::Lattice):
-                Destination = BOperand;
+                Destination = (*it).Address;
                 break;
             case (Mods::Dog):
                 Destination = Core[(BOperand + (*it).Address)%size]->BOperand;
@@ -72,12 +70,12 @@ public:
             case (Mods::Dollar):
             case (Mods :: Not):
             default:
-                Destination = (Destination +(*it).Address);
+                Destination = (BOperand +(*it).Address);
                 break;
         }
         switch (AOperandMod) {
             case (Mods::Lattice):
-                Source = AOperand;
+                Source = (*it).Address;
                 break;
             case (Mods::Star):
                 Source = Core[(AOperand + (*it).Address)%size]->AOperand;
@@ -91,7 +89,7 @@ public:
             case (Mods::Dollar):
             case (Mods :: Not):
             default:
-                Source = (Source +(*it).Address);
+                Source = (AOperand +(*it).Address);
                 break;
         }
         Source%=size;
