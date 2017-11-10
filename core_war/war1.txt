@@ -1,6 +1,11 @@
-;redcode
+;redcode-94
 ;author Andrew Kutalev
-;date 19.10.2017
-;strategy nesu huynu i win
-;qwerty
-	 ORG        start
+;date 09.11.2017
+;strategy sru datami na kajdoe 4 pole
+;name TYRION LANNISTAH
+;assert(CORESIZE % 4 == 0)
+ORG        1
+DAT.F #1 #0
+ADD.AB #4 $1
+MOV.I $-2 $-2
+JMP.A $-2 #0

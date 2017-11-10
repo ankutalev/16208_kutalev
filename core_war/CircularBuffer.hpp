@@ -7,9 +7,11 @@
 #include "list"
 #include <iostream>
 struct Flow {
-    size_t Address;
-    int WarriorNumber;
     int* FlowCounter;
+    int Address;
+    std::string Author;
+    std::string Name;
+    
 };
 class CircularBuffer{
     friend class MARS;

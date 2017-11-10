@@ -6,7 +6,8 @@
 #define CORE_WAR_FACTORY_HPP
 #include "instructions.hpp"
 #include "template_hash_table.hpp"
-
+static const int HashConst = 31;
+size_t HashCalculation (const std::string& in );
 size_t ENUMhash (const Opcodes& a);
 class Factory {
 public:
@@ -16,19 +17,22 @@ public:
         return &f;
     }
 
-    Instruction *create(Opcodes a) {
-        //   if (creatorz.find(a)==creatorz.end())
-        //   return   DefaultErrorPolicy::error();
-        return creatorz[a]();
+    Instruction *create(const std::string& a) {
+           if (!creatorzzz.Contains(a))
+                throw std::runtime_error("unknown command");
+        return creatorzzz[a]();
     }
 
-    bool regist3r(Opcodes  a, creator_t create) {
-        creatorz[a] = create;
+    bool regist3r(const std::string&  a, creator_t create) {
+        creatorzzz[a] = create;
         return true;
     }
-
+    bool Containz(const std::string& k) {
+        return creatorzzz.Contains(k);
+    }
 private:
     //  std::unordered_map<Id, Creator> creatorz;
-    HashTable<Opcodes,creator_t,&ENUMhash> creatorz;
+   // HashTable<Opcodes,creator_t,&ENUMhash> creatorz;
+    HashTable<std::string,creator_t ,&HashCalculation> creatorzzz;
 };
 #endif //CORE_WAR_FACTORY_HPP

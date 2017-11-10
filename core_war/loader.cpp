@@ -14,42 +14,24 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
     Core.resize(size);
     for (size_t i = 0; i < size ; i++) {
          Core[i] = Initial.Clone();
-        //*Core[i] = Initial; // initiate field with initial instruction
+      //  *Core[i] = Initial; // initiate field with initial instruction
     }
-    size_t Position = rand()%size; // start position for 1st warrior
+    int Position = rand()%size; // start position for 1st warrior
     Flow tmp;
-    tmp.WarriorNumber =0;
-   // Position = 0;
-   // tmp.ComAddess = Position;
-    for (Warrior X : in ) { // for each Warrior
+    for (Warrior& X : in ) { // for each Warrior
         for(size_t i = 0; i<X.Instructions.size();i++) {
             delete Core[(Position + i) % size];
             Core[(Position + i) % size] = X.Instructions[i]->Clone(); // putting instructions in core
         }
-        if (!tmp.WarriorNumber)
-            tmp.Address = (Position)% size;
-        else
-            tmp.Address = Position;
+        tmp.Name = X.Name;
+        tmp.Author = X.Author;
+        tmp.Address = (Position + X.StartPosition)%size;
         tmp.FlowCounter = &X.FlowCounter;
         Flows.Insert(tmp);
-        //StartingPositions.push_back(Position); // remember start position
         Position=(Position+SeparationRange) % size; //start position for new warrior
-        tmp.WarriorNumber++;
     }
-   // size_t a = StartingPositions[0];
-    //Instruction HH = Core[a];
-    //HH.Execution(Core,a);
-  //  Core[Flows[0].ComAddess]->Execution(Core,&Flows[0]);
-  /*  Core[StartingPositions[0]+1]->Execution(Core,StartingPositions[0]+1);
-    Core[StartingPositions[0]+2]->Execution(Core,StartingPositions[0]+2);
-    Core[StartingPositions[0]+3]->Execution(Core,StartingPositions[0]+3);
-    Core[StartingPositions[0]+4]->Execution(Core,StartingPositions[0]+4);
-*/
-
-   // std::cout<<"CHERT 5 RAZ POHODIL"<<std::endl;
-    for (size_t i =0; i<size;i++)
-        std::cout<<Core[i]->GettingCode(size)<<std::endl;
-    Battle();
+ //   for (size_t i =0; i<size;i++)
+   //     std::cout<<Core[i]->GettingCode(size)<<std::endl;
 
 }
 /*void MARS::Battle(std::vector<zaglushka> & potoks, size_t ties ) {
@@ -66,24 +48,18 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
         std::cout<<Core[i]->GettingCode(size)<<std::endl;
 }*/
     void MARS::Battle() {
-        std::cout<<Flows.WarCounter<<std::endl;
         auto it = Flows.data.begin();
-        for (;it!=Flows.data.end();++it)
-            std::cout<<(*it).Address<<" "<<(*it).WarriorNumber<<std::endl;
-        //(*Core[2])=(*Core[0]);
-       // Core[2]->Execution(Core,Flows,it);
 
         int i =0;
-        std::cout<<(*it).Address<<std::endl;
         while (Flows.GameIsOn(i,TieCycles)) {
             if(it==Flows.data.end())
                 it=Flows.data.begin();
             Core[(*it).Address]->Execution(Core,Flows,it);
             it++;
             i++;
-            std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
+        /*    std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
             for(size_t j=0;j<size;j++)
-                std::cout<<Core[j]->GettingCode(size)<<std::endl;
+                std::cout<<Core[j]->GettingCode(size)<<std::endl; */
 
         }
         if (i==TieCycles)
@@ -91,7 +67,7 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
         else {
 
             it = Flows.data.begin();
-            std::cout<<"THE WINNER CHICKEN DEALER IS "<<(*it).WarriorNumber<<std::endl;
+            std::cout<<"THE WINNER CHICKEN DEALER IS "<<(*it).Name<<" BY"<<(*it).Author<<"  AFTER "<<i<<" TURNS"<<std::endl;
         }
         for(size_t i=0;i<size;i++)
             delete Core[i];
@@ -99,6 +75,23 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
 int main () {
     srand(time(0));
     MARS X;
+    Warrior Test,Test1;
+//try {
+    Test.Born(const_cast<char *>("war1.txt"), X.GetMaxProcess());
+    Test1.Born(const_cast<char *>("war2.txt"), X.GetMaxProcess());
+    std::cout << Test.Author << std::endl << Test.Name << std::endl;
+
+
+    std::vector<Warrior> Ws;
+    Ws.push_back(Test);
+    Ws.push_back(Test1);
+    X.LoadCommands(Ws);
+    X.Battle();
+//}
+  //  catch (std::exception){
+    //        throw std::runtime_error("Invalid file");
+   // }
+/*
 //    X.SetConfiguration("config.redcode");
   // std:: vector<Warrior> Y;
     /*Instruction Imp(Opcodes:: MOV,Modifiers:: Not,Mods:: Not, Mods:: Not, 0,1);
@@ -112,7 +105,7 @@ int main () {
     X.LoadCommands(warriors); */
     //Dat_command Z;
     //  Mov_command Y;
-    Instruction * Imp = Factory::get_instance()->create(Opcodes::MOV);
+  /*  Instruction * Imp = Factory::get_instance()->create(Opcodes::MOV);
     Imp->AOperand = 0;
     Imp->BOperand = 1;
     Imp->BOperandMod = Mods::Dollar;
@@ -120,7 +113,7 @@ int main () {
     Imp->OpcodeMod = Modifiers ::I;
     std::vector<Instruction*> q;
     q.push_back(Imp);
-    Warrior IMP (q);
+    Warrior IMP (q);*/
     //Imp = new Mov_command (Opcodes:: MOV, Modifiers:: Not, Mods:: Dollar, Mods:: Dollar, 0, 1);
 /*
 
@@ -130,7 +123,7 @@ int main () {
     std::cout<<"sffsaf";
  MEOWWWW <* ^_^ *>   delete Imp; */
    // Instruction *D1 = new Dat_command;
-    std::vector<Instruction*> w;
+  //  std::vector<Instruction*> w;
  /*   Instruction* D1 = Factory::get_instance()->create(Opcodes::DAT);
     Instruction* D2 = Factory::get_instance()->create(Opcodes::ADD);
     D2->AOperand=5;
@@ -154,11 +147,11 @@ int main () {
     w.push_back(D3);
     w.push_back(D4);
     Warrior DWARF (w);*/
-    std::vector<Warrior> warriors;
+  //  std::vector<Warrior> warriors;
   //  warriors.push_back(DWARF);
-    warriors.push_back(IMP);
-    X.LoadCommands(warriors);
-    std::cout<<"sffsaf";
+   // warriors.push_back(IMP);
+   // X.LoadCommands(warriors);
+   // std::cout<<"sffsaf";
   /*  while(q.GameIsOn()) {
         std::cout<<(*(*it).FlowCounter)<<std::endl;
         it++;
@@ -167,11 +160,11 @@ int main () {
         y++;
         if(y==3)
             it=q.DeleteCurrent(it);
-    }*/
+    }
     //delete D1;
     //delete D2;
     //delete D3;
     //delete D4;
-    delete Imp;
+    delete Imp;*/
     return 0;
 }

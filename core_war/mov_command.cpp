@@ -2,7 +2,9 @@
 #include "factory.hpp"
 class Mov_command : public Instruction {
 public:
-    Mov_command() {Body = Opcodes:: MOV;}
+    Mov_command() {}
+
+    explicit Mov_command(Modifiers x){Body= Opcodes ::MOV,OpcodeMod=x;}
     Mov_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
         Body = a;
         OpcodeMod = b;
@@ -12,7 +14,7 @@ public:
         BOperand =f;
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
-        size_t size = Core.size();
+        int size = Core.size();
         SetSD(Core, it, size);
         switch (OpcodeMod) {
             case (Modifiers::A) :
@@ -37,17 +39,19 @@ public:
                 break;
             case (Modifiers ::Not):
             case (Modifiers::I):
-            std::cout<<"bil tuta"<<std::endl;
-            std::cout<<Source<< " "<<Destination<<std::endl;
-                delete Core[Destination];
-                Core[Destination] = Core[Source]->Clone();
-            std::cout<<"bil zdesya";
+                if (Source!=Destination){
+                    delete Core[Destination];
+                    Core[Destination] = Core[Source]->Clone();
+                }
             break;
         }
         (*it).Address = ((*it).Address + 1) % size;
         return true;
     }
-
+    bool IsItCorrect() override {
+        std::cout<<"mooooooooooov!"<< static_cast<int>(OpcodeMod);
+        return true;
+    }
     Mov_command* Clone() override {
         return new Mov_command(*this);
     }
@@ -55,6 +59,20 @@ public:
 Instruction* mc () {
     return new Mov_command;
 }
+Instruction* movab() {return new Mov_command(Modifiers::AB);}
+Instruction* movba() {return new Mov_command(Modifiers::BA);}
+Instruction* mova() {return new Mov_command(Modifiers::A);}
+Instruction* movb() {return new Mov_command(Modifiers::B);}
+Instruction* movf() {return new Mov_command(Modifiers::F);}
+Instruction* movx() {return new Mov_command(Modifiers::X);}
+Instruction* movi() {return new Mov_command(Modifiers::I);}
+
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::MOV,mc);
+    bool a = Factory::get_instance()->regist3r("MOV.AB",&movab);
+    bool b = Factory::get_instance()->regist3r("MOV.BA",&movba);
+    bool c = Factory::get_instance()->regist3r("MOV.A",&mova);
+    bool d = Factory::get_instance()->regist3r("MOV.B",&movb);
+    bool f = Factory::get_instance()->regist3r("MOV.F",&movf);
+    bool e = Factory::get_instance()->regist3r("MOV.X",&movx);
+    bool g = Factory::get_instance()->regist3r("MOV.I",&movi);
 }

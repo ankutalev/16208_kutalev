@@ -13,7 +13,17 @@ struct zaglushka {
     size_t ComAddess;
     int* FlowCounter;
 };
-enum class Mods :int  { Lattice = 1, Dollar = 2, Dog = 3, Star = 4, Less = 5, More = 6, Open =7, Close =8, Not = 0};
+enum class Mods :char{
+            Lattice = '#',
+            Dollar = '$',
+            Dog = '@',
+            Star ='*' ,
+            Less = '<',
+            More = '>',
+            Open ='{',
+            Close ='}',
+            Not = ' '
+};
 enum class Modifiers :int   { A = 1, B =2, AB=3, BA=4, F=5, X=6, I=7, Not=0};
 enum class Opcodes : int {
     DAT = 0,
@@ -46,12 +56,10 @@ public:
     Instruction() {}
     virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator){}//std::cout<<"gde ya...";}
     virtual bool GetMARSInstruction(std::ifstream &) {};
-    virtual bool IsItCorrect(std::string &) {};
+    virtual bool IsItCorrect() {};
     size_t GettingCode(unsigned CoreSize) {
-        size_t Code = (BOperand+CoreSize)%CoreSize + (CoreSize+AOperand)%CoreSize*10000 +
-                      static_cast<int>(BOperandMod)*100000000 + static_cast<int>(AOperandMod)*1000000000+
-                      static_cast<int>(OpcodeMod)*10000000000 + static_cast<int>(Body)*100000000000;
-        return Code;
+        std::cout<< static_cast<int>(Body)<< static_cast<int>(OpcodeMod)<< static_cast<char>(AOperandMod)<<AOperand << static_cast<char>(BOperandMod) << BOperand;
+        return 0;
     }
     void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,size_t size) {
         switch (BOperandMod) {
@@ -92,6 +100,10 @@ public:
                 Source = (AOperand +(*it).Address);
                 break;
         }
+        while(Source<0 || Destination<0) {
+            Source+=size;
+            Destination+=size;
+        }
         Source%=size;
         Destination%=size;
     }
@@ -112,6 +124,20 @@ public:
             BOperand = in.BOperand;
         }
         return *this;
+    }
+    static bool IsAmodAllowed (char c) {
+        const char allowed [5] = {'*','$','#','{','}'};
+        for(size_t i = 0; i < 5; i++)
+            if (c==allowed[i])
+                return true;
+        return false;
+    }
+    static bool IsBmodAllowed (char c) {
+        const char allowed [5] = {'@','$','#','<','>'};
+        for(size_t i = 0; i < 5; i++)
+            if (c==allowed[i])
+                return true;
+        return false;
     }
     Opcodes Body;
     Modifiers OpcodeMod;

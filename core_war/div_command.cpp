@@ -69,6 +69,9 @@ public:
 Instruction* Divc() {
     return new Div_command;
 }
+/*Instruction* Diva() {
+    return new Div_command();
+}*/
 namespace {
     bool b = Factory::get_instance()->regist3r(Opcodes::DIV, Divc);
 }

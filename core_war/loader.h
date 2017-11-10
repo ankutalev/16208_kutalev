@@ -4,6 +4,8 @@
 
 #ifndef CORE_WAR_LOADER_H
 #define CORE_WAR_LOADER_H
+
+#include <random>
 #include "warrior.hpp"
 #include "CircularBuffer.hpp"
 //#include "template_hashtable_hpp"
@@ -11,20 +13,27 @@
 class MARS {
     friend class CircularBuffer;
 public:
+    MARS() {
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::uniform_int_distribution<int> uni(MinSeparation,7000);
+        SeparationRange = uni(rng);
+        std::cout<<SeparationRange<<std::endl;
+    }
     void SetConfiguration(const char*);
     void LoadCommands (std::vector<Warrior>& in);
    // void Execution (std:: vector <Warrior>& in);
   //  void Battle (std::vector <zaglushka>&,size_t);
     void Battle ();
+    size_t GetMaxProcess() { return MaxProcess;}
 private:
-    size_t size = 10;
-    size_t TieCycles =  20;
+    int size = 8000;
+    int TieCycles =   100000;
     Instruction Initial = Instruction(Opcodes::DAT,Modifiers::F,Mods::Lattice,Mods::Lattice,0,0);
     size_t MaxLength = 300;
     size_t MaxProcess = 64;
-    size_t MinSeparation = 30;
-    //size_t SeparationRange = rand()%size ; //to do - rand separation
-    size_t SeparationRange = 40;
+    int MinSeparation = 300;
+    int SeparationRange; //to do - rand separation
     size_t NumberOfWarriors = 2;
     std::vector<Instruction*> Core;
     std::vector<size_t> StartingPositions;

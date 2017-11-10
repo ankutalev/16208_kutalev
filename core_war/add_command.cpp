@@ -9,6 +9,7 @@ public:
         AOperand = 0;
         BOperand = 0;
     }
+    explicit Add_command(Modifiers x){Body= Opcodes ::ADD,OpcodeMod=x;}
     Add_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
         Body = a;
         OpcodeMod = b;
@@ -18,7 +19,7 @@ public:
         BOperand =f;
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
-        size_t size = Core.size();
+        int size = Core.size();
         SetSD(Core,it,size);
         switch (OpcodeMod) {
             case (Modifiers::A) :
@@ -56,6 +57,20 @@ public:
 Instruction* ac() {
     return new Add_command;
 }
+Instruction* addab() {return new Add_command(Modifiers::AB);}
+Instruction* addba() {return new Add_command(Modifiers::BA);}
+Instruction* addta() {return new Add_command(Modifiers::A);}
+Instruction* addtb() {return new Add_command(Modifiers::B);}
+Instruction* addtf() {return new Add_command(Modifiers::F);}
+Instruction* addx() {return new Add_command(Modifiers::X);}
+Instruction* addi() {return new Add_command(Modifiers::I);}
+
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::ADD, ac);
+    bool a = Factory::get_instance()->regist3r("ADD.AB",&addab);
+    bool b = Factory::get_instance()->regist3r("ADD.BA",&addba);
+    bool c = Factory::get_instance()->regist3r("ADD.A",&addta);
+    bool d = Factory::get_instance()->regist3r("ADD.B",&addtb);
+    bool f = Factory::get_instance()->regist3r("ADD.F",&addtf);
+    bool e = Factory::get_instance()->regist3r("ADD.X",&addx);
+    bool g = Factory::get_instance()->regist3r("ADD.I",&addi);
 }
