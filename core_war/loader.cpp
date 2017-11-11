@@ -52,14 +52,15 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
 
         int i =0;
         while (Flows.GameIsOn(i,TieCycles)) {
-            if(it==Flows.data.end())
-                it=Flows.data.begin();
+            if(it==Flows.data.end()) {
+                it = Flows.data.begin();
+            }
             Core[(*it).Address]->Execution(Core,Flows,it);
             it++;
             i++;
-        /*    std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
-            for(size_t j=0;j<size;j++)
-                std::cout<<Core[j]->GettingCode(size)<<std::endl; */
+          //  std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
+          //  for(size_t j=0;j<size;j++)
+            //    td::cout<<Core[j]->GettingCode(size)<<std::endl;s
 
         }
         if (i==TieCycles)
@@ -69,8 +70,10 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
             it = Flows.data.begin();
             std::cout<<"THE WINNER CHICKEN DEALER IS "<<(*it).Name<<" BY"<<(*it).Author<<"  AFTER "<<i<<" TURNS"<<std::endl;
         }
-        for(size_t i=0;i<size;i++)
+        for(size_t i=0;i<size;i++) {
+            Core[i]->GettingCode(size);
             delete Core[i];
+        }
     }
 int main () {
     srand(time(0));
@@ -79,7 +82,6 @@ int main () {
 //try {
     Test.Born(const_cast<char *>("war1.txt"), X.GetMaxProcess());
     Test1.Born(const_cast<char *>("war2.txt"), X.GetMaxProcess());
-    std::cout << Test.Author << std::endl << Test.Name << std::endl;
 
 
     std::vector<Warrior> Ws;

@@ -54,31 +54,31 @@ public:
                                                                         AOperand(e),
                                                                         BOperand(f) {}
     Instruction() {}
-    virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator){}//std::cout<<"gde ya...";}
+    virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator&){}//std::cout<<"gde ya...";}
     virtual bool GetMARSInstruction(std::ifstream &) {};
     virtual bool IsItCorrect() {};
     size_t GettingCode(unsigned CoreSize) {
-        std::cout<< static_cast<int>(Body)<< static_cast<int>(OpcodeMod)<< static_cast<char>(AOperandMod)<<AOperand << static_cast<char>(BOperandMod) << BOperand;
+        std::cout<< static_cast<int>(Body)<< static_cast<int>(OpcodeMod)<< static_cast<char>(AOperandMod)<<AOperand << static_cast<char>(BOperandMod) << BOperand<<std::endl;
         return 0;
     }
-    void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,size_t size) {
+    void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,int size) {
         switch (BOperandMod) {
             case (Mods::Lattice):
                 Destination = (*it).Address;
                 break;
             case (Mods::Dog):
-                Destination = Core[(BOperand + (*it).Address)%size]->BOperand;
+                Destination = Core[(BOperand + (*it).Address)%size]->BOperand% size;
                 break;
             case (Mods::More):
-                Destination = Core[(BOperand + (*it).Address)%size]->BOperand+1;
+                Destination = (Core[(BOperand + (*it).Address)%size]->BOperand+1)% size;
                 break;
             case (Mods::Less):
-                Destination = Core[(BOperand + (*it).Address)%size+1]->BOperand;
+                Destination = Core[(BOperand + (*it).Address)%size+1]->BOperand % size;
                 break;
             case (Mods::Dollar):
             case (Mods :: Not):
             default:
-                Destination = (BOperand +(*it).Address);
+                Destination = (BOperand +(*it).Address) % size;
                 break;
         }
         switch (AOperandMod) {
@@ -86,26 +86,24 @@ public:
                 Source = (*it).Address;
                 break;
             case (Mods::Star):
-                Source = Core[(AOperand + (*it).Address)%size]->AOperand;
+                Source = Core[(AOperand + (*it).Address)%size]->AOperand% size;
                 break;
             case (Mods::Close):
-                Source = Core[(AOperand + (*it).Address)%size]->AOperand+1;
+                Source = (Core[(AOperand + (*it).Address)%size]->AOperand+1)% size;
                 break;
             case (Mods::Open):
-                Source = Core[(AOperand + (*it).Address)%size+1]->AOperand;
+                Source = Core[(AOperand + (*it).Address)%size+1]->AOperand % size;
                 break;
             case (Mods::Dollar):
             case (Mods :: Not):
             default:
-                Source = (AOperand +(*it).Address);
+                Source = (AOperand +(*it).Address) % size;
                 break;
         }
         while(Source<0 || Destination<0) {
             Source+=size;
             Destination+=size;
         }
-        Source%=size;
-        Destination%=size;
     }
     virtual Instruction* Clone() {
         return new Instruction(*this);

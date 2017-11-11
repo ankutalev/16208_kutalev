@@ -7,12 +7,11 @@ bool CircularBuffer::GameIsOn(size_t Count,size_t Tie) {
 }
 
 std::list<Flow>::iterator CircularBuffer::DeleteCurrent(std::list<Flow>::iterator i) {
-    std::cout<<"ZASHEL UDALIT' POTOK  I"<<*(*i).FlowCounter<<std::endl;
     int* tmp = (*i).FlowCounter;
     (*tmp)--;
+    std::cout<<"SHETCHIK POTOKA U VOINA "<<(*i).Name<<"= "<<*tmp<<std::endl;
     if (!(*tmp)) {
         WarCounter--;
-        std::cout<<"WARCOUNTER ="<<WarCounter<<std::endl;
     }
     return data.erase(i);
 }
@@ -21,6 +20,9 @@ void CircularBuffer::Insert(Flow& in) {
     data.push_back(in);
 }
 void CircularBuffer::InsertPrev(std::list<Flow>::iterator it,Flow& in) {
-    (*in.FlowCounter)++;
+    (*(*it).FlowCounter)++;
+    std::cout<<"ya rodilsya!!! vsego nas : = "<<*(*it).FlowCounter<<std::endl;
+
+//    std::cout<<"SHA VSTAVYAT BUDU"<<(*(*it).FlowCounter) << "   " <<(*in.FlowCounter) <<std::endl;
     data.insert(it,in);
 }

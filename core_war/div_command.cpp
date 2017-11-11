@@ -1,6 +1,7 @@
 #include "factory.hpp"
 class Div_command: public Instruction {
 public:
+    explicit Div_command(Modifiers x){Body= Opcodes ::DIV,OpcodeMod=x;}
     Div_command() {
         Body = Opcodes ::DIV;
         OpcodeMod = Modifiers::AB;
@@ -17,15 +18,9 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
         SetSD(Core,it,size);
-        if (Source)
-            Core[Destination]->BOperand/= Source;
-        else {
-            Queue.DeleteCurrent(it);
-            return true;
-        }
         if (!Core[Source]->AOperand&& (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
             Queue.DeleteCurrent(it);
             return true;
@@ -37,29 +32,29 @@ public:
 
         switch (OpcodeMod) {
             case (Modifiers::A) :
-                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->AOperand;
+                Core[Destination]->AOperand /= Core[Source]->AOperand;
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->AOperand;
+                Core[Destination]->BOperand /= Core[Source]->AOperand;
                 break;
             case (Modifiers::B) :
-                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->BOperand;
+                Core[Destination]->BOperand /= Core[Source]->BOperand;
                 break;
             case (Modifiers::BA):
-                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->BOperand;
+                Core[Destination]->AOperand /= Core[Source]->BOperand;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
-                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->AOperand;
-                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->BOperand;
+                Core[Destination]->AOperand /= Core[Source]->AOperand;
+                Core[Destination]->BOperand /= Core[Source]->BOperand;
                 break;
             case (Modifiers::X):
-                Core[Destination]->BOperand = Core[Destination]->BOperand / Core[Source]->AOperand;
-                Core[Destination]->AOperand = Core[Destination]->AOperand / Core[Source]->BOperand;
+                Core[Destination]->BOperand /= Core[Source]->AOperand;
+                Core[Destination]->AOperand /= Core[Source]->BOperand;
                 break;
 
         }
-        ((*it).Address++)%size;
+        (*it).Address = ((*it).Address+1)%size;
         return true;
     }
     Div_command* Clone() override {
@@ -69,9 +64,20 @@ public:
 Instruction* Divc() {
     return new Div_command;
 }
-/*Instruction* Diva() {
-    return new Div_command();
-}*/
+Instruction* divab() {return new Div_command(Modifiers::AB);}
+Instruction* divba() {return new Div_command(Modifiers::BA);}
+Instruction* divta() {return new Div_command(Modifiers::A);}
+Instruction* divtb() {return new Div_command(Modifiers::B);}
+Instruction* divtf() {return new Div_command(Modifiers::F);}
+Instruction* divx() {return new Div_command(Modifiers::X);}
+Instruction* divi() {return new Div_command(Modifiers::I);}
+
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::DIV, Divc);
+    bool a = Factory::get_instance()->regist3r("DIV.AB",&divab);
+    bool b = Factory::get_instance()->regist3r("DIV.BA",&divba);
+    bool c = Factory::get_instance()->regist3r("DIV.A",&divta);
+    bool d = Factory::get_instance()->regist3r("DIV.B",&divtb);
+    bool f = Factory::get_instance()->regist3r("DIV.F",&divtf);
+    bool e = Factory::get_instance()->regist3r("DIV.X",&divx);
+    bool g = Factory::get_instance()->regist3r("DIV.I",&divi);
 }

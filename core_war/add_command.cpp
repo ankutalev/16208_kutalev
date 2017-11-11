@@ -18,8 +18,8 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
-        int size = Core.size();
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+        size_t size = Core.size();
         SetSD(Core,it,size);
         switch (OpcodeMod) {
             case (Modifiers::A) :

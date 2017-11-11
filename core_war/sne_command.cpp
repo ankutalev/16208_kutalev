@@ -2,6 +2,7 @@
 #include "factory.hpp"
 class Sne_command : public Instruction {
 public:
+    explicit Sne_command(Modifiers x) { Body = Opcodes ::SNE, OpcodeMod = x;}
     Sne_command() {}
     Sne_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
         Body = a;
@@ -11,7 +12,7 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
         SetSD(Core,it,size);
         switch (OpcodeMod) {
@@ -46,6 +47,20 @@ public:
 Instruction* Snec () {
     return new Sne_command;
 }
+Instruction* sneab() {return new Sne_command(Modifiers::AB);}
+Instruction* sneba() {return new Sne_command(Modifiers::BA);}
+Instruction* sneta() {return new Sne_command(Modifiers::A);}
+Instruction* snetb() {return new Sne_command(Modifiers::B);}
+Instruction* snetf() {return new Sne_command(Modifiers::F);}
+Instruction* snex() {return new Sne_command(Modifiers::X);}
+Instruction* snei() {return new Sne_command(Modifiers::I);}
+
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::SNE,Snec);
+    bool a = Factory::get_instance()->regist3r("SNE.AB",&sneab);
+    bool b = Factory::get_instance()->regist3r("SNE.BA",&sneba);
+    bool c = Factory::get_instance()->regist3r("SNE.A",&sneta);
+    bool d = Factory::get_instance()->regist3r("SNE.B",&snetb);
+    bool f = Factory::get_instance()->regist3r("SNE.F",&snetf);
+    bool e = Factory::get_instance()->regist3r("SNE.X",&snex);
+    bool g = Factory::get_instance()->regist3r("SNE.I",&snei);
 }

@@ -10,9 +10,12 @@ public:
         BOperand = 0;
     }
     explicit Dat_command(Modifiers x){Body= Opcodes ::DAT,OpcodeMod=x;}
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
-        std::cout<<"dsa";
-        Queue.DeleteCurrent(it);
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+        std::cout<<"VZORVALSYA KUSOK PO ADRESU  "<<(*it).Address<<std::endl;
+        for(auto i = 0; i<Core.size();i++) {
+            Core[i]->GettingCode(i);
+        }
+        it = Queue.DeleteCurrent(it);
         return true;
     }
     Dat_command* Clone() override {

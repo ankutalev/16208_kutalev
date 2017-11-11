@@ -13,9 +13,13 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         int size = Core.size();
         SetSD(Core, it, size);
+        if (AOperandMod == Mods::Lattice)
+            Source = AOperand;
+        if (BOperandMod == Mods::Lattice)
+            Destination = BOperand;
         switch (OpcodeMod) {
             case (Modifiers::A) :
                 Core[Destination]->AOperand = Core[Source]->AOperand;

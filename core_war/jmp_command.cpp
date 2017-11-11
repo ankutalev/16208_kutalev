@@ -19,10 +19,14 @@ public:
         AOperand = a;
         BOperand = 0;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         int size = Core.size();
         SetSD(Core,it,size);
-        (*it).Address = ((*it).Address+AOperand+size)%size;
+        if (AOperandMod == Mods::Lattice)
+            Source = AOperand;
+        (*it).Address = ((*it).Address=Source)%size;
+        if ((*it).Address < 0)
+            ((*it).Address+=size);
         return true;
     }
     Jmp_command* Clone() override {

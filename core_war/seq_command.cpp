@@ -2,6 +2,7 @@
 #include "factory.hpp"
 class Seq_command : public Instruction {
 public:
+    explicit Seq_command(Modifiers x) { Body = Opcodes ::SEQ, OpcodeMod = x;}
     Seq_command() {}
     Seq_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
         Body = a;
@@ -11,7 +12,7 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
         SetSD(Core,it,size);
         switch (OpcodeMod) {
@@ -46,6 +47,20 @@ public:
 Instruction* seqc () {
     return new Seq_command;
 }
+Instruction* seqab() {return new Seq_command(Modifiers::AB);}
+Instruction* seqba() {return new Seq_command(Modifiers::BA);}
+Instruction* seqta() {return new Seq_command(Modifiers::A);}
+Instruction* seqtb() {return new Seq_command(Modifiers::B);}
+Instruction* seqtf() {return new Seq_command(Modifiers::F);}
+Instruction* seqx() {return new Seq_command(Modifiers::X);}
+Instruction* seqi() {return new Seq_command(Modifiers::I);}
+
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::SEQ,seqc);
+    bool a = Factory::get_instance()->regist3r("SEQ.AB",&seqab);
+    bool b = Factory::get_instance()->regist3r("SEQ.BA",&seqba);
+    bool c = Factory::get_instance()->regist3r("SEQ.A",&seqta);
+    bool d = Factory::get_instance()->regist3r("SEQ.B",&seqtb);
+    bool f = Factory::get_instance()->regist3r("SEQ.F",&seqtf);
+    bool e = Factory::get_instance()->regist3r("SEQ.X",&seqx);
+    bool g = Factory::get_instance()->regist3r("SEQ.I",&seqi);
 }

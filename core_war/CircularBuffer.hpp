@@ -11,7 +11,7 @@ struct Flow {
     int Address;
     std::string Author;
     std::string Name;
-    
+
 };
 class CircularBuffer{
     friend class MARS;
