@@ -2,6 +2,8 @@
 //#include <iostream>
 #include "loader.h"
 #include "ctime"
+
+#include "string"
 //#include "jmp_command.cpp"
 //#include "add_command.cpp"
 
@@ -13,15 +15,18 @@
 void MARS::LoadCommands(std::vector<Warrior> &in) {
     Core.resize(size);
     for (size_t i = 0; i < size ; i++) {
-         Core[i] = Initial.Clone();
+         Core[i] = Initial->Clone();
       //  *Core[i] = Initial; // initiate field with initial instruction
     }
+    int t=0;
     int Position = rand()%size; // start position for 1st warrior
+  //  int Position = 0;
     Flow tmp;
     for (Warrior& X : in ) { // for each Warrior
         for(size_t i = 0; i<X.Instructions.size();i++) {
             delete Core[(Position + i) % size];
             Core[(Position + i) % size] = X.Instructions[i]->Clone(); // putting instructions in core
+
         }
         tmp.Name = X.Name;
         tmp.Author = X.Author;
@@ -29,6 +34,9 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
         tmp.FlowCounter = &X.FlowCounter;
         Flows.Insert(tmp);
         Position=(Position+SeparationRange) % size; //start position for new warrior
+        t++;
+        if(t==1)
+            std::cout<<"TYRION LANNISTAH ON "<<tmp.Address<<std::endl;
     }
  //   for (size_t i =0; i<size;i++)
    //     std::cout<<Core[i]->GettingCode(size)<<std::endl;
@@ -50,19 +58,32 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
     void MARS::Battle() {
         auto it = Flows.data.begin();
 
-        int i =0;
+        size_t i =0;
         while (Flows.GameIsOn(i,TieCycles)) {
             if(it==Flows.data.end()) {
                 it = Flows.data.begin();
+
             }
+
             Core[(*it).Address]->Execution(Core,Flows,it);
             it++;
             i++;
-          //  std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
-          //  for(size_t j=0;j<size;j++)
-            //    td::cout<<Core[j]->GettingCode(size)<<std::endl;s
+//            std::cout;
+//            std::cout<<"POSLE "<<i<<"HODA SITUACIYA::"<<std::endl;
+    //        for(size_t j=0;j<size;j++) {
+  //              Core[j]->GettingCode(j);
+      //      }
+          //  if (i==1)
+          //      std::cout<<"das";
+
 
         }
+
+        for(size_t i=0;i<size;i++) {
+            Core[i]->GettingCode(i);
+            delete Core[i];
+        }
+
         if (i==TieCycles)
             std::cout<<"NO WINNER CHICKEN DEALER!!!!"<<std::endl;
         else {
@@ -70,18 +91,16 @@ void MARS::LoadCommands(std::vector<Warrior> &in) {
             it = Flows.data.begin();
             std::cout<<"THE WINNER CHICKEN DEALER IS "<<(*it).Name<<" BY"<<(*it).Author<<"  AFTER "<<i<<" TURNS"<<std::endl;
         }
-        for(size_t i=0;i<size;i++) {
-            Core[i]->GettingCode(size);
-            delete Core[i];
-        }
+
     }
 int main () {
     srand(time(0));
-    MARS X;
+    MARS X(Factory::get_instance()->create("DAT.F"));
+   // MARS X;
     Warrior Test,Test1;
 //try {
-    Test.Born(const_cast<char *>("war1.txt"), X.GetMaxProcess());
-    Test1.Born(const_cast<char *>("war2.txt"), X.GetMaxProcess());
+    Test.Born(const_cast<char *>("war2.txt"), X.GetMaxProcess());
+    Test1.Born(const_cast<char *>("war3.txt"), X.GetMaxProcess());
 
 
     std::vector<Warrior> Ws;

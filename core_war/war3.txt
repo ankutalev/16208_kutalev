@@ -1,1 +1,27 @@
-afsfsfsaaaa
+;redcode-94
+;author W. Wender
+;date a long time ago
+;RAZMNOJAUS I EBU
+;name MICE
+
+ORG 1
+
+DAT.F #0 #0
+
+MOV.AB #14 $-1
+MOV.A #10 $-2
+MOV.I {-3 <5
+
+DJN.B $-1 $-4
+SPL.F @3 #0
+ADD.AB #553 $2
+JMZ.B $-6 $-7
+
+DAT.F #0 #431
+DAT.F #316 #316
+DAT.F #317 #317
+DAT.F #318 #318
+DAT.F #319 #319
+DAT.F #320 #320
+DAT.F #321 #321
+DAT.F #322 #322

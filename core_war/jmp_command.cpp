@@ -20,11 +20,11 @@ public:
         BOperand = 0;
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
-        int size = Core.size();
-        SetSD(Core,it,size);
+        size_t size = Core.size();
+        SetOffset(Core,it,size,AOperandMod,AOperand,&AOffset);
         if (AOperandMod == Mods::Lattice)
-            Source = AOperand;
-        (*it).Address = ((*it).Address=Source)%size;
+            AOffset = AOperand;
+        (*it).Address = AOffset%size;
         if ((*it).Address < 0)
             ((*it).Address+=size);
         return true;

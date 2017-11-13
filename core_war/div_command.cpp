@@ -20,37 +20,37 @@ public:
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
-        SetSD(Core,it,size);
-        if (!Core[Source]->AOperand&& (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
+        SetOffsets(Core,it,size);
+        if (!Core[AOffset]->AOperand&& (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
             Queue.DeleteCurrent(it);
             return true;
         }
-        if (!Core[Source]->BOperand&& (OpcodeMod!= Modifiers::AB) && (OpcodeMod!=Modifiers::A)) {
+        if (!Core[AOffset]->BOperand&& (OpcodeMod!= Modifiers::AB) && (OpcodeMod!=Modifiers::A)) {
             Queue.DeleteCurrent(it);
             return true;
         }
 
         switch (OpcodeMod) {
             case (Modifiers::A) :
-                Core[Destination]->AOperand /= Core[Source]->AOperand;
+                Core[BOffset]->AOperand /= Core[AOffset]->AOperand;
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand /= Core[Source]->AOperand;
+                Core[BOffset]->BOperand /= Core[AOffset]->AOperand;
                 break;
             case (Modifiers::B) :
-                Core[Destination]->BOperand /= Core[Source]->BOperand;
+                Core[BOffset]->BOperand /= Core[AOffset]->BOperand;
                 break;
             case (Modifiers::BA):
-                Core[Destination]->AOperand /= Core[Source]->BOperand;
+                Core[BOffset]->AOperand /= Core[AOffset]->BOperand;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
-                Core[Destination]->AOperand /= Core[Source]->AOperand;
-                Core[Destination]->BOperand /= Core[Source]->BOperand;
+                Core[BOffset]->AOperand /= Core[AOffset]->AOperand;
+                Core[BOffset]->BOperand /= Core[AOffset]->BOperand;
                 break;
             case (Modifiers::X):
-                Core[Destination]->BOperand /= Core[Source]->AOperand;
-                Core[Destination]->AOperand /= Core[Source]->BOperand;
+                Core[BOffset]->BOperand /= Core[AOffset]->AOperand;
+                Core[BOffset]->AOperand /= Core[AOffset]->BOperand;
                 break;
 
         }

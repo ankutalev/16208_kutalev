@@ -14,38 +14,40 @@ public:
         BOperand =f;
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
-        int size = Core.size();
-        SetSD(Core, it, size);
-        if (AOperandMod == Mods::Lattice)
-            Source = AOperand;
-        if (BOperandMod == Mods::Lattice)
-            Destination = BOperand;
+        size_t size = Core.size();
+        //SetSD(Core, it, size);
+
+        SetOffsets(Core,it,size);
         switch (OpcodeMod) {
             case (Modifiers::A) :
-                Core[Destination]->AOperand = Core[Source]->AOperand;
+                Core[BOffset]->AOperand = Core[AOffset]->AOperand;
                 break;
             case (Modifiers::B) :
-                Core[Destination]->BOperand = Core[Source]->BOperand;
+                Core[BOffset]->BOperand = Core[AOffset]->BOperand;
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand=Core[Source]->AOperand;
+                Core[BOffset]->BOperand=Core[AOffset]->AOperand;
                 break;
             case (Modifiers ::BA):
-                Core[Destination]->AOperand=Core[Source]->BOperand;
+                Core[BOffset]->AOperand=Core[AOffset]->BOperand;
                 break;
             case (Modifiers ::F):
-                Core[Destination]->AOperand=Core[Source]->AOperand;
-                Core[Destination]->BOperand=Core[Source]->BOperand;
+                Core[BOffset]->AOperand=Core[AOffset]->AOperand;
+                Core[BOffset]->BOperand=Core[AOffset]->BOperand;
                 break;
             case(Modifiers::X):
-                Core[Destination]->BOperand=Core[Source]->AOperand;
-                Core[Destination]->AOperand=Core[Source]->BOperand;
+                Core[BOffset]->BOperand=Core[AOffset]->AOperand;
+                Core[BOffset]->AOperand=Core[AOffset]->BOperand;
                 break;
             case (Modifiers ::Not):
             case (Modifiers::I):
-                if (Source!=Destination){
-                    delete Core[Destination];
-                    Core[Destination] = Core[Source]->Clone();
+                if (AOperandMod == Mods::Lattice)
+                    AOffset = AOperand;
+                if (BOperandMod == Mods::Lattice)
+                    BOffset = BOperand;
+                if (AOffset!=BOffset){
+                    delete Core[BOffset];
+                    Core[BOffset] = Core[AOffset]->Clone();
                 }
             break;
         }

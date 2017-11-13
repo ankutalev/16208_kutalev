@@ -13,13 +13,21 @@
 class MARS {
     friend class CircularBuffer;
 public:
-    MARS() {
+   explicit MARS(Instruction* def) {
         std::random_device rd;
         std::mt19937 rng(rd());
-        std::uniform_int_distribution<int> uni(MinSeparation,150);
+        std::uniform_int_distribution<int> uni(MinSeparation,7000);
         SeparationRange = uni(rng);
         std::cout<<SeparationRange<<std::endl;
+        Initial=def;
     }
+  /*explicit MARS() {
+      std::random_device rd;
+      std::mt19937 rng(rd());
+      std::uniform_int_distribution<int> uni(MinSeparation,7000);
+      SeparationRange = uni(rng);
+      std::cout<<SeparationRange<<std::endl;
+  }*/
     void SetConfiguration(const char*);
     void LoadCommands (std::vector<Warrior>& in);
    // void Execution (std:: vector <Warrior>& in);
@@ -27,12 +35,12 @@ public:
     void Battle ();
     size_t GetMaxProcess() { return MaxProcess;}
 private:
-    int size = 200;
-    int TieCycles =   10000;
-    Instruction Initial = Instruction(Opcodes::DAT,Modifiers::F,Mods::Lattice,Mods::Lattice,0,0);
+    int size = 8000;
+    size_t TieCycles = 1000000;
+    Instruction* Initial;
     size_t MaxLength = 300;
     size_t MaxProcess = 64;
-    int MinSeparation = 30;
+    int MinSeparation = 300;
     int SeparationRange; //to do - rand separation
     size_t NumberOfWarriors = 2;
     std::vector<Instruction*> Core;

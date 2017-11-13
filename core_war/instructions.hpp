@@ -54,26 +54,81 @@ public:
                                                                         AOperand(e),
                                                                         BOperand(f) {}
     Instruction() {}
-    virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator&){}//std::cout<<"gde ya...";}
+    virtual bool Execution (std::vector<Instruction*>&,CircularBuffer&,std::list<Flow>::iterator&){std::cout<<"gde ya..."; return true;}//std::cout<<"gde ya...";}
     virtual bool GetMARSInstruction(std::ifstream &) {};
     virtual bool IsItCorrect() {};
-    size_t GettingCode(unsigned CoreSize) {
-        std::cout<< static_cast<int>(Body)<< static_cast<int>(OpcodeMod)<< static_cast<char>(AOperandMod)<<AOperand << static_cast<char>(BOperandMod) << BOperand<<std::endl;
+    size_t GettingCode(unsigned i) {
+    //    if(Body== Opcodes::DAT&& AOperand==0&& BOperand==0)
+      //      return 0;
+            std::cout<< static_cast<int>(Body)<< static_cast<int>(OpcodeMod)<< static_cast<char>(AOperandMod)<<AOperand << static_cast<char>(BOperandMod) << BOperand<<"  "<<i<<std::endl ;
         return 0;
     }
-    void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,int size) {
+    void SetOffset (std::vector<Instruction*>& Core, std::list<Flow>::iterator it, int size,Mods ModAorB,int Operand, int* AorB) {
+        int tmp = (Operand+(*it).Address)%size;
+        if(tmp<0)
+            tmp+=size;
+        switch(ModAorB) {
+
+            case (Mods::Lattice):
+                *AorB = 0;
+                break;
+            case (Mods :: Star):
+                *AorB = Core[tmp]->AOperand %size;
+                break;
+            case (Mods::Dog):
+                *AorB = Core[tmp]->BOperand% size;
+                break;
+            case (Mods::Open):
+                Core[tmp]->AOperand--;
+                *AorB = (Core[tmp]->AOperand)% size;
+                break;
+            case (Mods ::Close):
+                *AorB = (Core[tmp]->AOperand)% size;
+                Core[tmp]->AOperand++;
+                break;
+            case (Mods::More):
+                *AorB = (Core[tmp]->BOperand)% size;
+                Core[tmp]->BOperand++;
+                break;
+            case (Mods::Less):
+                Core[tmp]->BOperand--;
+                *AorB = (Core[tmp]->BOperand)% size;
+                break;
+            case (Mods::Dollar):
+            case (Mods :: Not):
+                *AorB = Operand;
+                break;
+         }
+        *AorB = (*AorB + (*it).Address)%size;
+        if(*AorB<0)
+            (*AorB)+=size;
+    }
+/*    void SetSD(std::vector<Instruction*> Core,std::list<Flow>::iterator it,int size) {
         switch (BOperandMod) {
             case (Mods::Lattice):
                 Destination = (*it).Address;
                 break;
+            case (Mods :: Star):
+                Destination = Core[(BOperand+(*it).Address)%size]->AOperand %size;
             case (Mods::Dog):
                 Destination = Core[(BOperand + (*it).Address)%size]->BOperand% size;
                 break;
+            case (Mods::Open):
+                Core[(BOperand + (*it).Address)%size]->AOperand--;
+            std::cout<<"PROVERYAU ADRES U DATA= "<<Core[(BOperand + (*it).Address)%size]->AOperand<<std::endl;
+                Destination = (Core[(BOperand + (*it).Address)%size]->AOperand)% size;
+                break;
+            case (Mods ::Close):
+                Destination = (Core[(BOperand + (*it).Address)%size]->AOperand)% size;
+                Core[(AOperand + (*it).Address)%size]->AOperand++;
+                break;
             case (Mods::More):
-                Destination = (Core[(BOperand + (*it).Address)%size]->BOperand+1)% size;
+                Destination = (Core[(BOperand + (*it).Address)%size]->BOperand)% size;
+                Core[(BOperand + (*it).Address)%size]->BOperand++;
                 break;
             case (Mods::Less):
-                Destination = Core[(BOperand + (*it).Address)%size+1]->BOperand % size;
+                Core[(BOperand + (*it).Address)%size]->BOperand--;
+                Destination = (Core[(BOperand + (*it).Address)%size]->BOperand)% size;
                 break;
             case (Mods::Dollar):
             case (Mods :: Not):
@@ -88,11 +143,24 @@ public:
             case (Mods::Star):
                 Source = Core[(AOperand + (*it).Address)%size]->AOperand% size;
                 break;
+            case (Mods:: Dog):
+                Source = Core[(AOperand+(*it).Address)%size]->BOperand% size;
+                break;
             case (Mods::Close):
-                Source = (Core[(AOperand + (*it).Address)%size]->AOperand+1)% size;
+                Source = Core[(AOperand + (*it).Address) % size]->AOperand % size;
+                Core[(AOperand + (*it).Address) % size]->AOperand++;
                 break;
             case (Mods::Open):
-                Source = Core[(AOperand + (*it).Address)%size+1]->AOperand % size;
+                Core[(AOperand + (*it).Address)%size]->AOperand--;
+                Source = Core[(AOperand + (*it).Address)%size]->AOperand%size;
+                break;
+            case (Mods::More):
+                Source = (Core[(AOperand + (*it).Address)%size]->BOperand)% size;
+                Core[(AOperand + (*it).Address)%size]->BOperand++;
+                break;
+            case (Mods::Less):
+                Core[(AOperand + (*it).Address)%size]->BOperand--;
+                Source = (Core[(AOperand + (*it).Address)%size]->BOperand)% size;
                 break;
             case (Mods::Dollar):
             case (Mods :: Not):
@@ -100,10 +168,22 @@ public:
                 Source = (AOperand +(*it).Address) % size;
                 break;
         }
-        while(Source<0 || Destination<0) {
+        if(Source < 0)
             Source+=size;
+        if(Destination<0)
             Destination+=size;
-        }
+    }*/
+    void SetOffsets (std::vector<Instruction*>& Core, std::list<Flow>::iterator it, size_t size) {
+        SetOffset(Core,it,size,AOperandMod,AOperand,&AOffset);
+        SetOffset(Core,it,size,BOperandMod,BOperand,&BOffset);
+    }
+    Instruction (const Instruction& in){
+        Body = in.Body;
+        OpcodeMod=in.OpcodeMod;
+        AOperand=in.AOperand;
+        BOperand=in.BOperand;
+        AOperandMod=in.AOperandMod;
+        BOperandMod= in.BOperandMod;
     }
     virtual Instruction* Clone() {
         return new Instruction(*this);
@@ -124,15 +204,15 @@ public:
         return *this;
     }
     static bool IsAmodAllowed (char c) {
-        const char allowed [5] = {'*','$','#','{','}'};
-        for(size_t i = 0; i < 5; i++)
+        const char allowed [8] = {'@','*','$','#','{','}','>','<'};
+        for(size_t i = 0; i < 8; i++)
             if (c==allowed[i])
                 return true;
         return false;
     }
     static bool IsBmodAllowed (char c) {
-        const char allowed [5] = {'@','$','#','<','>'};
-        for(size_t i = 0; i < 5; i++)
+        const char allowed [8] = {'*','@','$','#','<','>','{','}'};
+        for(size_t i = 0; i < 8; i++)
             if (c==allowed[i])
                 return true;
         return false;
@@ -146,6 +226,8 @@ public:
 protected:
     int Source;
     int Destination;
+    int AOffset;
+    int BOffset;
 };
 
 

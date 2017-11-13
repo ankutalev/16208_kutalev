@@ -20,25 +20,29 @@ public:
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
-        SetSD(Core,it,size);
+        SetOffsets(Core,it,size);
         if (AOperandMod == Mods::Lattice)
-            Source = AOperand;
+            AOffset = AOperand;
+        if (BOperandMod == Mods::Lattice)
+            BOffset = BOperand;
         switch (OpcodeMod) {
             case (Modifiers::A) :
             case (Modifiers::BA):
-                (!Core[Destination]->BOperand) ? ((*it).Address = Source) % size : ((*it).Address+1)%size;
+                (!Core[BOffset]->AOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
+            case (Modifiers::Not):
             case (Modifiers::B) :
             case (Modifiers::AB):
-                (!Core[Destination]->AOperand) ? ((*it).Address = Source) % size : ((*it).Address+1)%size;
+                (!Core[BOffset]->BOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
             case (Modifiers::X):
-                (!Core[Destination]->AOperand&&!Core[Destination]->BOperand) ? ((*it).Address = Source) % size : ((*it).Address+1)%size;
+                (!Core[BOffset]->AOperand&&!Core[BOffset]->BOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
 
         }
+        (*it).Address%=size;
         if ((*it).Address < 0)
             (*it).Address+=size;
         return true;

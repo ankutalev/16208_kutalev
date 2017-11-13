@@ -20,30 +20,30 @@ public:
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
-        SetSD(Core,it,size);
+        SetOffsets(Core,it,size);
         switch (OpcodeMod) {
             case (Modifiers::A) :
-                Core[Destination]->AOperand = (Core[Source]->AOperand+Core[Destination]->AOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->AOperand+Core[BOffset]->AOperand)%size;
                 break;
             case (Modifiers::B) :
-                Core[Destination]->BOperand = (Core[Source]->BOperand+Core[Destination]->BOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->BOperand+Core[BOffset]->BOperand)%size;
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand = (Core[Destination]->BOperand+Core[Source]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[BOffset]->BOperand+Core[AOffset]->AOperand)%size;
                 break;
             case (Modifiers::BA):
-                Core[Destination]->AOperand = (Core[Destination]->AOperand+ Core[Source]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[BOffset]->AOperand+ Core[AOffset]->BOperand)%size;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
-                Core[Destination]->AOperand = (Core[Source]->AOperand+Core[Destination]->AOperand)%size;
-                Core[Destination]->BOperand = (Core[Source]->BOperand+Core[Destination]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->AOperand+Core[BOffset]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->BOperand+Core[BOffset]->BOperand)%size;
                 break;
             case (Modifiers::X):
             case (Modifiers::Not):
             default:
-                Core[Destination]->BOperand = (Core[Source]->AOperand+Core[Destination]->BOperand)%size;
-                Core[Destination]->AOperand = (Core[Source]->BOperand+Core[Destination]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->AOperand+Core[BOffset]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->BOperand+Core[BOffset]->AOperand)%size;
                 break;
 
         }

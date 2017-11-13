@@ -1,10 +1,21 @@
 ;redcode-94
-;author Andrew	
-;date 09.11.2017
-;strategy sru datami na kajdoe 4 pole
-;name fixed DWARF
-;assert(CORESIZE % 4 == 0)
+;name Paperone
+;author Beppe Bezzi
+;strategy Silk replicator
+;kill Paperone
+;assert CORESIZE == 8000
 
-SPL.F $0 #0
-MOV.I $0 $1
+        SPL.F     $1      <300    ;\
+        SPL.F     $1      <150    ;generate 7 consecutive processes
+        MOV.I     $-1     $0       ;/
+
+        SPL.F     $3620   #0      ;split to new copy
+        MOV.I      >-1    }-1     ;copy self to new location
+
+        MOV.I   $4   >2005   ;linear bombing
+        MOV.I   $3   }2042   ;A-indirect bombing for anti-vamp
+
+        ADD.A   #50     $-4    ;distance new copy   
+        JMP.A   $-5     <-5    ;reset source pointer, make new copy
+        DAT.F   >2667   >5334   ;anti-imp bomb
 

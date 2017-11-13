@@ -22,17 +22,19 @@ public:
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
-        SetSD(Core,it,size);
+        SetOffset(Core,it,size,AOperandMod,AOperand,&AOffset);
         if (AOperandMod == Mods::Lattice)
-            Source = AOperand;
+            AOffset = AOperand;
+        if (BOperandMod == Mods::Lattice)
+            BOffset = BOperand;
         if( (*(*it).FlowCounter) < Queue.FlowCounter ) {
             Flow tmp = (*it);
-            tmp.Address = Source;
+            tmp.Address = AOffset%size;
             Queue.InsertPrev(it, tmp);
         }
         else
             std::cout<<"TOO MUCH FLOWS"<<std::endl;
-            (*it).Address=((*it).Address+1)%size;
+        (*it).Address=((*it).Address+1)%size;
         return true;
     }
     Spl_command* Clone() override {

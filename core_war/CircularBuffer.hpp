@@ -7,6 +7,8 @@
 #include "list"
 #include <iostream>
 struct Flow {
+    Flow() {}
+    Flow(const Flow& in):FlowCounter(in.FlowCounter),Address(in.Address),Author(in.Author),Name(in.Name) {}
     int* FlowCounter;
     int Address;
     std::string Author;

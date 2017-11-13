@@ -21,8 +21,6 @@ void CircularBuffer::Insert(Flow& in) {
 }
 void CircularBuffer::InsertPrev(std::list<Flow>::iterator it,Flow& in) {
     (*(*it).FlowCounter)++;
-    std::cout<<"ya rodilsya!!! vsego nas : = "<<*(*it).FlowCounter<<std::endl;
-
-//    std::cout<<"SHA VSTAVYAT BUDU"<<(*(*it).FlowCounter) << "   " <<(*in.FlowCounter) <<std::endl;
+    std::cout<<(*it).Name<<"  rodilsya!!!po adresu "<<in.Address<< " vsego nas : = "<<*(*it).FlowCounter<<std::endl;
     data.insert(it,in);
 }

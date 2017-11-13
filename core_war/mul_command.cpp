@@ -20,30 +20,30 @@ public:
     }
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         size_t size = Core.size();
-        SetSD(Core,it,size);
+        SetOffsets(Core,it,size);
         switch (OpcodeMod) {
             case (Modifiers::A) :
-                Core[Destination]->AOperand = (Core[Source]->AOperand*Core[Destination]->AOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->AOperand*Core[BOffset]->AOperand)%size;
                 break;
             case (Modifiers::B) :
-                Core[Destination]->BOperand = (Core[Source]->BOperand*Core[Destination]->BOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->BOperand*Core[BOffset]->BOperand)%size;
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand = (Core[Destination]->BOperand*Core[Source]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[BOffset]->BOperand*Core[AOffset]->AOperand)%size;
                 break;
             case (Modifiers::BA):
-                Core[Destination]->AOperand = (Core[Destination]->AOperand*Core[Source]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[BOffset]->AOperand* Core[AOffset]->BOperand)%size;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
-                Core[Destination]->AOperand = (Core[Source]->AOperand*Core[Destination]->AOperand)%size;
-                Core[Destination]->BOperand = (Core[Source]->BOperand*Core[Destination]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->AOperand*Core[BOffset]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->BOperand*Core[BOffset]->BOperand)%size;
                 break;
             case (Modifiers::X):
             case (Modifiers::Not):
             default:
-                Core[Destination]->BOperand = (Core[Source]->AOperand*Core[Destination]->BOperand)%size;
-                Core[Destination]->AOperand = (Core[Source]->BOperand*Core[Destination]->AOperand)%size;
+                Core[BOffset]->BOperand = (Core[AOffset]->AOperand*Core[BOffset]->BOperand)%size;
+                Core[BOffset]->AOperand = (Core[AOffset]->BOperand*Core[BOffset]->AOperand)%size;
                 break;
 
         }
@@ -54,23 +54,23 @@ public:
         return new Mul_command(*this);
     }
 };
-Instruction* mulc() {
+Instruction* muac() {
     return new Mul_command;
 }
-Instruction* mulab() {return new Mul_command(Modifiers::AB);}
-Instruction* mulba() {return new Mul_command(Modifiers::BA);}
-Instruction* multa() {return new Mul_command(Modifiers::A);}
-Instruction* multb() {return new Mul_command(Modifiers::B);}
-Instruction* multf() {return new Mul_command(Modifiers::F);}
-Instruction* mulx() {return new Mul_command(Modifiers::X);}
-Instruction* muli() {return new Mul_command(Modifiers::I);}
+Instruction* Mulab() {return new Mul_command(Modifiers::AB);}
+Instruction* Mulba() {return new Mul_command(Modifiers::BA);}
+Instruction* Multa() {return new Mul_command(Modifiers::A);}
+Instruction* Multb() {return new Mul_command(Modifiers::B);}
+Instruction* Multf() {return new Mul_command(Modifiers::F);}
+Instruction* Mulx() {return new Mul_command(Modifiers::X);}
+Instruction* Muli() {return new Mul_command(Modifiers::I);}
 
 namespace {
-    bool a = Factory::get_instance()->regist3r("MUL.AB",&mulab);
-    bool b = Factory::get_instance()->regist3r("MUL.BA",&mulba);
-    bool c = Factory::get_instance()->regist3r("MUL.A",&multa);
-    bool d = Factory::get_instance()->regist3r("MUL.B",&multb);
-    bool f = Factory::get_instance()->regist3r("MUL.F",&multf);
-    bool e = Factory::get_instance()->regist3r("MUL.X",&mulx);
-    bool g = Factory::get_instance()->regist3r("MUL.I",&muli);
+    bool a = Factory::get_instance()->regist3r("MUL.AB",&Mulab);
+    bool b = Factory::get_instance()->regist3r("MUL.BA",&Mulba);
+    bool c = Factory::get_instance()->regist3r("MUL.A",&Multa);
+    bool d = Factory::get_instance()->regist3r("MUL.B",&Multb);
+    bool f = Factory::get_instance()->regist3r("MUL.F",&Multf);
+    bool e = Factory::get_instance()->regist3r("MUL.X",&Mulx);
+    bool g = Factory::get_instance()->regist3r("MUL.I",&Muli);
 }

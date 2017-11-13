@@ -9,12 +9,15 @@ public:
         AOperand = 0;
         BOperand = 0;
     }
-    explicit Dat_command(Modifiers x){Body= Opcodes ::DAT,OpcodeMod=x;}
+    explicit Dat_command(Modifiers x){Body= Opcodes ::DAT,OpcodeMod=x;AOperandMod = Mods::Lattice;
+        BOperandMod = Mods::Lattice;
+        AOperand = 0;
+        BOperand = 0;}
     bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
         std::cout<<"VZORVALSYA KUSOK PO ADRESU  "<<(*it).Address<<std::endl;
-        for(auto i = 0; i<Core.size();i++) {
-            Core[i]->GettingCode(i);
-        }
+        //for(auto i = 0; i<Core.size();i++) {
+        //    Core[i]->GettingCode(i);
+        //}
         it = Queue.DeleteCurrent(it);
         return true;
     }
