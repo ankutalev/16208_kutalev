@@ -1,39 +1,24 @@
 #include "factory.hpp"
 class Div_command: public Instruction {
 public:
-    explicit Div_command(Modifiers x){Body= Opcodes ::DIV,OpcodeMod=x;}
-    Div_command() {
-        Body = Opcodes ::DIV;
-        OpcodeMod = Modifiers::AB;
-        AOperandMod = Mods::Lattice;
-        BOperandMod = Mods::Lattice;
-        AOperand = 0;
-        BOperand = 0;
-    }
-    Div_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
-        Body = a;
-        OpcodeMod = b;
-        AOperandMod = c;
-        BOperandMod = d;
-        AOperand = e;
-        BOperand =f;
-    }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+    explicit Div_command(Modifiers x){OpcodeMod=x;}
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
         size_t size = Core.size();
         SetOffsets(Core,it,size);
-        if (!Core[AOffset]->AOperand&& (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
+        if (!Core[AOffset]->AOperand && (OpcodeMod!= Modifiers::BA) && (OpcodeMod!=Modifiers::B)) {
             Queue.DeleteCurrent(it);
-            return true;
+            return;
         }
-        if (!Core[AOffset]->BOperand&& (OpcodeMod!= Modifiers::AB) && (OpcodeMod!=Modifiers::A)) {
+        if (!Core[AOffset]->BOperand && (OpcodeMod!= Modifiers::AB) && (OpcodeMod!=Modifiers::A)) {
             Queue.DeleteCurrent(it);
-            return true;
+            return;
         }
 
         switch (OpcodeMod) {
             case (Modifiers::A) :
                 Core[BOffset]->AOperand /= Core[AOffset]->AOperand;
                 break;
+
             case (Modifiers::AB):
                 Core[BOffset]->BOperand /= Core[AOffset]->AOperand;
                 break;
@@ -44,6 +29,7 @@ public:
                 Core[BOffset]->AOperand /= Core[AOffset]->BOperand;
                 break;
             case (Modifiers ::I):
+            case (Modifiers ::Not):
             case (Modifiers::F):
                 Core[BOffset]->AOperand /= Core[AOffset]->AOperand;
                 Core[BOffset]->BOperand /= Core[AOffset]->BOperand;
@@ -55,15 +41,11 @@ public:
 
         }
         (*it).Address = ((*it).Address+1)%size;
-        return true;
     }
     Div_command* Clone() override {
         return new Div_command(*this);
     }
 };
-Instruction* Divc() {
-    return new Div_command;
-}
 Instruction* divab() {return new Div_command(Modifiers::AB);}
 Instruction* divba() {return new Div_command(Modifiers::BA);}
 Instruction* divta() {return new Div_command(Modifiers::A);}

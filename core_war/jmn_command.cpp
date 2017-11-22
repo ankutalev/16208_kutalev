@@ -1,24 +1,8 @@
 #include "factory.hpp"
 class Jmn_command: public Instruction {
 public:
-    explicit Jmn_command(Modifiers x){Body= Opcodes ::JMN,OpcodeMod=x;}
-    Jmn_command() {
-        Body = Opcodes ::JMN;
-        OpcodeMod = Modifiers::A;
-        AOperandMod = Mods::Dollar;
-        BOperandMod = Mods::Not;
-        AOperand = 0;
-        BOperand = 0;
-    }
-    Jmn_command (Mods c,int a,Mods d, int b) {
-        Body = Opcodes ::JMN;
-        OpcodeMod = Modifiers::A;
-        AOperandMod = c;
-        BOperandMod = d;
-        AOperand = a;
-        BOperand = b;
-    }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+    explicit Jmn_command(Modifiers x){OpcodeMod=x;}
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
         size_t size = Core.size();
         SetOffsets(Core,it,size);
         if (AOperandMod == Mods::Lattice)
@@ -28,23 +12,22 @@ public:
         switch (OpcodeMod) {
             case (Modifiers::A) :
             case (Modifiers::BA):
-                (Core[BOffset]->AOperand) ? ((*it).Address = AOffset) % size : ((*it).Address+1)%size;
+                (Core[BOffset]->AOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
             case (Modifiers::Not):
             case (Modifiers::B) :
             case (Modifiers::AB):
-                (Core[BOffset]->BOperand) ? ((*it).Address = AOffset) % size : ((*it).Address+1)%size;
+                (Core[BOffset]->BOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
             case (Modifiers ::I):
             case (Modifiers::F):
             case (Modifiers::X):
-                (Core[BOffset]->AOperand||Core[BOffset]->BOperand) ? ((*it).Address = AOffset) % size : ((*it).Address+1)%size;
+                (Core[BOffset]->AOperand||Core[BOffset]->BOperand) ? (*it).Address = (AOffset % size) : ((*it).Address+1)%size;
                 break;
         }
         (*it).Address%=size;
         if ((*it).Address < 0) 
             (*it).Address+=size;
-        return true;
     }
     Jmn_command* Clone() override {
         return new Jmn_command(*this);

@@ -1,8 +1,8 @@
 ;redcode-94
-;author Andrew Kutalev
+;author XXXXXXXXXX 	
 ;date 09.11.2017
 ;strategy sru datami na kajdoe 4 pole
-;name TYRION LANNISTAH
+;name BASTARD TYRIONA LANNISTAH
 ;assert(CORESIZE % 4 == 0)
 ORG 1
 DAT.F #1 #0  ;ajsadkdsaihdaujhdsau

@@ -2,13 +2,12 @@
 #include "factory.hpp"
 class Nop_command : public Instruction {
 public:
-    explicit Nop_command (Modifiers x) { Body = Opcodes ::NOP; OpcodeMod = x;}
+    explicit Nop_command (Modifiers x) { OpcodeMod = x;}
     Nop_command() {}
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
         size_t size = Core.size();
-        std::cout<< "<^-^>/ meow!!"<<std::endl;
+        std::cout<<(*it).Name<< " have a nice cat! <^-^>/ meow!!"<<std::endl;
         (*it).Address=((*it).Address+1)%size;
-        return true;
     }
     Nop_command* Clone() override {
         return new Nop_command(*this);

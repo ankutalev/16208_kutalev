@@ -4,11 +4,12 @@
 
 #ifndef CORE_WAR_FACTORY_HPP
 #define CORE_WAR_FACTORY_HPP
+
+#include <map>
 #include "instructions.hpp"
 #include "template_hash_table.hpp"
 static const int HashConst = 31;
 size_t HashCalculation (const std::string& in );
-size_t ENUMhash (const Opcodes& a);
 class Factory {
 public:
     typedef Instruction *(*creator_t)();
@@ -17,7 +18,7 @@ public:
         return &f;
     }
 
-    Instruction *create(const std::string& a) {
+    Instruction* create(const std::string& a) {
            if (!creatorzzz.Contains(a))
                 throw std::runtime_error("unknown command");
         return creatorzzz[a]();
@@ -27,6 +28,7 @@ public:
         creatorzzz[a] = create;
         return true;
     }
+
     bool Containz(const std::string& k) {
         return creatorzzz.Contains(k);
     }
@@ -34,5 +36,6 @@ private:
     //  std::unordered_map<Id, Creator> creatorz;
    // HashTable<Opcodes,creator_t,&ENUMhash> creatorz;
     HashTable<std::string,creator_t ,&HashCalculation> creatorzzz;
+   // std:: map<std::string, creator_t> creatorzzz;
 };
 #endif //CORE_WAR_FACTORY_HPP

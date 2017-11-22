@@ -17,7 +17,7 @@ public:
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
         size_t size = Core.size();
         SetSD(Core,it,size);
         switch (OpcodeMod) {
@@ -34,12 +34,13 @@ public:
                 Core[Destination]->AOperand = (Core[Destination]->AOperand- Core[Source]->BOperand)%size;
                 break;
             case (Modifiers ::I):
+            case (Modifiers::Not):
             case (Modifiers::F):
                 Core[Destination]->AOperand = (Core[Source]->AOperand-Core[Destination]->AOperand)%size;
                 Core[Destination]->BOperand = (Core[Source]->BOperand-Core[Destination]->BOperand)%size;
                 break;
             case (Modifiers::X):
-            case (Modifiers::Not):
+
             default:
                 Core[Destination]->BOperand = (Core[Source]->AOperand-Core[Destination]->BOperand)%size;
                 Core[Destination]->AOperand = (Core[Source]->BOperand-Core[Destination]->AOperand)%size;
@@ -47,7 +48,6 @@ public:
 
         }
         (*it).Address = ((*it).Address+1)%size;
-        return true;
     }
     Sub_command* Clone() override {
         return new Sub_command(*this);

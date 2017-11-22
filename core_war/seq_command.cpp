@@ -2,17 +2,16 @@
 #include "factory.hpp"
 class Seq_command : public Instruction {
 public:
-    explicit Seq_command(Modifiers x) { Body = Opcodes ::SEQ, OpcodeMod = x;}
+    explicit Seq_command(Modifiers x) { OpcodeMod = x;}
     Seq_command() {}
-    Seq_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
-        Body = a;
+    Seq_command( Modifiers b, Mods c, Mods d, int e, int f) {
         OpcodeMod = b;
         AOperandMod = c;
         BOperandMod = d;
         AOperand = e;
         BOperand =f;
     }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
         size_t size = Core.size();
        // SetSD(Core,it,size);
         SetOffsets(Core,it,size);
@@ -29,17 +28,18 @@ public:
             case (Modifiers::BA):
                 (Core[AOffset]->BOperand==Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
                 break;
+
             case (Modifiers::F):
                 (Core[AOffset]->AOperand==Core[BOffset]->AOperand && Core[AOffset]->BOperand==Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
                 break;
             case (Modifiers::X):
                 (Core[AOffset]->AOperand==Core[BOffset]->BOperand && Core[AOffset]->BOperand==Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
                 break;
+            case (Modifiers::Not):
             case (Modifiers ::I):
                 (Core[AOffset]==Core[BOffset]) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
                 break;
         }
-        return true;
     }
     Seq_command* Clone() override {
         return new Seq_command(*this);

@@ -3,17 +3,8 @@
 #include <iostream>
 class Sne_command : public Instruction {
 public:
-    explicit Sne_command(Modifiers x) { Body = Opcodes ::SNE, OpcodeMod = x;}
-    Sne_command() {}
-    Sne_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
-        Body = a;
-        OpcodeMod = b;
-        AOperandMod = c;
-        BOperandMod = d;
-        AOperand = e;
-        BOperand =f;
-    }
-    bool Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator& it) override {
+    explicit Sne_command(Modifiers x) { OpcodeMod = x;}
+    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
         size_t size = Core.size();
         SetOffsets(Core,it,size);
         switch (OpcodeMod) {
@@ -35,19 +26,16 @@ public:
             case (Modifiers::X):
                 (Core[AOffset]->AOperand!=Core[BOffset]->BOperand || Core[AOffset]->BOperand!=Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
                 break;
+            case (Modifiers ::Not):
             case (Modifiers ::I):
                  (Core[AOffset]==Core[BOffset]) ? (*it).Address=((*it).Address+1)%size : (*it).Address=((*it).Address+2)%size;
                 break;
         }
-        return true;
     }
     Sne_command* Clone() override {
         return new Sne_command(*this);
     }
 };
-Instruction* Snec () {
-    return new Sne_command;
-}
 Instruction* sneab() {return new Sne_command(Modifiers::AB);}
 Instruction* sneba() {return new Sne_command(Modifiers::BA);}
 Instruction* sneta() {return new Sne_command(Modifiers::A);}

@@ -1,0 +1,2 @@
+;config
+warriors 3
