@@ -1,9 +1,5 @@
 #include "factory.hpp"
-#include "loader.h"
-#include "warrior.hpp"
-#include <fstream>
-#include <iostream>
-#include <vector>
+#include "loader.hpp"
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     std::cout << "give me files!!!!!!";
@@ -18,7 +14,7 @@ int main(int argc, char *argv[]) {
     Warriors[i - 1 - t].Born(argv[i], XXX.GetMaxProcess());
   }
   std::cout << "heh";
-  XXX.LoadCommands(Warriors);
+  Loader::loadCommands(Warriors,XXX);
   XXX.Battle();
   return 0;
 }

@@ -2,61 +2,71 @@
 #include "factory.hpp"
 class Seq_command : public Instruction {
 public:
-    explicit Seq_command(Modifiers x) { OpcodeMod = x;}
-    Seq_command() {}
-    Seq_command( Modifiers b, Mods c, Mods d, int e, int f) {
-        OpcodeMod = b;
-        AOperandMod = c;
-        BOperandMod = d;
-        AOperand = e;
-        BOperand =f;
-    }
-    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
-        size_t size = Core.size();
-       // SetSD(Core,it,size);
-        SetOffsets(Core,it,size);
-        switch (OpcodeMod) {
+    explicit Seq_command(Modifiers x) { Fields.OpcodeMod = x;Name = "SEQ";}
+    Seq_command() = default;
+    void Execution (ExecutionContext& Executor) override {
+        Executor.SetOffsets(Fields);
+        switch (Fields.OpcodeMod) {
             case (Modifiers::A) :
-                (Core[AOffset]->AOperand==Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)==Executor.getA(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::B) :
-                (Core[AOffset]->BOperand==Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getB(Fields.AOffset)==Executor.getB(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::AB):
-                (Core[AOffset]->AOperand==Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)==Executor.getB(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::BA):
-                (Core[AOffset]->BOperand==Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
-
+                if (Executor.getB(Fields.AOffset)==Executor.getA(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::F):
-                (Core[AOffset]->AOperand==Core[BOffset]->AOperand && Core[AOffset]->BOperand==Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)==Executor.getA(Fields.BOffset)&&Executor.getB(Fields.AOffset)==Executor.getB(Fields.BOffset) ) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::X):
-                (Core[AOffset]->AOperand==Core[BOffset]->BOperand && Core[AOffset]->BOperand==Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)==Executor.getB(Fields.BOffset)&&Executor.getB(Fields.AOffset)==Executor.getA(Fields.BOffset) ) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::Not):
             case (Modifiers ::I):
-                (Core[AOffset]==Core[BOffset]) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if(Executor.isInstructionsEqual(Fields.AOffset,Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
         }
+        Executor.ForwardQueue();
     }
     Seq_command* Clone() override {
         return new Seq_command(*this);
     }
 };
-Instruction* seqc () {
-    return new Seq_command;
-}
-Instruction* seqab() {return new Seq_command(Modifiers::AB);}
-Instruction* seqba() {return new Seq_command(Modifiers::BA);}
-Instruction* seqta() {return new Seq_command(Modifiers::A);}
-Instruction* seqtb() {return new Seq_command(Modifiers::B);}
-Instruction* seqtf() {return new Seq_command(Modifiers::F);}
-Instruction* seqx() {return new Seq_command(Modifiers::X);}
-Instruction* seqi() {return new Seq_command(Modifiers::I);}
+
 
 namespace {
+    Instruction* seqab() {return new Seq_command(Modifiers::AB);}
+    Instruction* seqba() {return new Seq_command(Modifiers::BA);}
+    Instruction* seqta() {return new Seq_command(Modifiers::A);}
+    Instruction* seqtb() {return new Seq_command(Modifiers::B);}
+    Instruction* seqtf() {return new Seq_command(Modifiers::F);}
+    Instruction* seqx() {return new Seq_command(Modifiers::X);}
+    Instruction* seqi() {return new Seq_command(Modifiers::I);}
     bool a = Factory::get_instance()->regist3r("SEQ.AB",&seqab);
     bool b = Factory::get_instance()->regist3r("SEQ.BA",&seqba);
     bool c = Factory::get_instance()->regist3r("SEQ.A",&seqta);
@@ -64,4 +74,5 @@ namespace {
     bool f = Factory::get_instance()->regist3r("SEQ.F",&seqtf);
     bool e = Factory::get_instance()->regist3r("SEQ.X",&seqx);
     bool g = Factory::get_instance()->regist3r("SEQ.I",&seqi);
+bool w = Factory::get_instance()->nameRegister("SEQ","SEQ");
 }

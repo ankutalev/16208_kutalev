@@ -1,5 +1,5 @@
 #include "CircularBuffer.hpp"
-#include "loader.h"
+#include "mars.h"
 
 bool CircularBuffer::GameIsOn(size_t Count, size_t Tie) {
 
@@ -29,11 +29,9 @@ void CircularBuffer::DeleteCurrent(CircularBuffer::Iterator &i) {
   if (!(*(*i).FlowCounter)) {
     WarCounter--;
   }
-  if (i.cur == i.beg) {
-    std::cout << "piimav na geydzucu!" << std::endl;
-    ++i.beg;
-  }
+
   i.cur = data.erase(i.cur);
+  i.beg = data.begin();
 }
 void CircularBuffer::Insert(Flow &in) {
   WarCounter++;

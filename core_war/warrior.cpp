@@ -1,12 +1,8 @@
 //
-// Created by ulyssess on 24.10.17.
 //
-
-#include "warrior.hpp"
-#include "factory.hpp"
-#include "loader.h"
-#include "memory.h"
 #include <cstring>
+#include "warrior.hpp"
+
 
 void Warrior::Born(char *in, size_t limit) {
   std::ifstream fin;
@@ -38,6 +34,7 @@ void Warrior::Born(char *in, size_t limit) {
       fin >> RedCode;
     }
     size_t instruct_counter = 0;
+
     try {
       do { // getting Opcode
         std::shared_ptr<Instruction> a;
@@ -46,18 +43,20 @@ void Warrior::Born(char *in, size_t limit) {
         fin >> tmp; // getting AFIELD
 
         if (Instruction::IsModAllowed(tmp[0])) { // checking for amod
-          a.get()->AOperandMod = static_cast<Mods>(tmp[0]);
-          a.get()->AOperand = std::stoi(tmp.substr(1, tmp.length() - 1));
+          a.get()->GetData().AOperandMod = static_cast<Mods>(tmp[0]);
+          a.get()->GetData().AOperand =
+              std::stoi(tmp.substr(1, tmp.length() - 1));
         } else
-          a.get()->AOperand = std::stoi(tmp.substr(0, tmp.length()));
+          a.get()->GetData().AOperand = std::stoi(tmp.substr(0, tmp.length()));
 
         fin >> tmp; // gettinf BFIELD
 
         if (Instruction::IsModAllowed(tmp[0])) {
-          a.get()->BOperandMod = static_cast<Mods>(tmp[0]);
-          a.get()->BOperand = std::stoi(tmp.substr(1, tmp.length() - 1));
+          a.get()->GetData().BOperandMod = static_cast<Mods>(tmp[0]);
+          a.get()->GetData().BOperand =
+              std::stoi(tmp.substr(1, tmp.length() - 1));
         } else
-          a.get()->BOperand = std::stoi(tmp.substr(0, tmp.length()));
+          a.get()->GetData().BOperand = std::stoi(tmp.substr(0, tmp.length()));
 
         instruct_counter++;
         Instructions.push_back(a);
@@ -82,4 +81,3 @@ void Warrior::Born(char *in, size_t limit) {
     //}
   }
 }
-

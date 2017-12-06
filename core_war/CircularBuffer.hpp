@@ -1,10 +1,9 @@
 //
-// Created by ulyssess on 26.10.17.
 //
 
 #ifndef CORE_WAR_CIRCULARBUFFER_HPP
 #define CORE_WAR_CIRCULARBUFFER_HPP
-#include "list"
+#include <list>
 #include <iostream>
 struct Flow {
     int* FlowCounter;
@@ -32,6 +31,8 @@ public:
         std::list<Flow>::iterator cur;
         std::list<Flow>::iterator end;
     };
+
+
     CircularBuffer() = default;
     explicit CircularBuffer (size_t Counter) : FlowCounter(Counter) {}
     ~CircularBuffer() = default;

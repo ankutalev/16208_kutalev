@@ -1,5 +1,4 @@
 //
-// Created by ulyssess on 12.10.17.
 //
 
 #ifndef HASHTABLE_TEMPLATE_TEMPLATE_SHARED_PTR_H

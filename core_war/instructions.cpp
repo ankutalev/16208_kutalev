@@ -28,3 +28,6 @@
 /*bool Dat_command::Execution(std::vector<Instruction*> &Core, size_t Address) {
     return false;
 }*/
+bool Instruction::nameRegister() {
+  return Factory::get_instance()->nameRegister(Name,Name);
+}

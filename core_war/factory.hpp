@@ -1,11 +1,9 @@
 //
-// Created by ulyssess on 01.11.17.
 //
 
 #ifndef CORE_WAR_FACTORY_HPP
 #define CORE_WAR_FACTORY_HPP
-
-#include <map>
+class Factory;
 #include "instructions.hpp"
 #include "template_hash_table.hpp"
 static const int HashConst = 31;
@@ -17,8 +15,8 @@ public:
         static Factory f;
         return &f;
     }
-
     Instruction* create(const std::string& a) {
+            std::cout<<a<<std::endl;
            if (!creatorzzz.Contains(a))
                 throw std::runtime_error("unknown command");
         return creatorzzz[a]();
@@ -32,10 +30,15 @@ public:
     bool Containz(const std::string& k) {
         return creatorzzz.Contains(k);
     }
+
+    bool nameRegister(const std::string& a,const std::string& b) {
+      if(namez.Contains(a))
+        throw std::runtime_error("Two commands have a same name!");
+      namez[a] = b;
+      return true;
+    }
 private:
-    //  std::unordered_map<Id, Creator> creatorz;
-   // HashTable<Opcodes,creator_t,&ENUMhash> creatorz;
     HashTable<std::string,creator_t ,&HashCalculation> creatorzzz;
-   // std:: map<std::string, creator_t> creatorzzz;
+    HashTable<std::string,std::string,&HashCalculation> namez;
 };
 #endif //CORE_WAR_FACTORY_HPP

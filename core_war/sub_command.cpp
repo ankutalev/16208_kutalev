@@ -1,61 +1,72 @@
 #include "factory.hpp"
 class Sub_command: public Instruction {
 public:
-    Sub_command() {
-        Body = Opcodes ::SUB;
-        OpcodeMod = Modifiers::AB;
-        AOperandMod = Mods::Lattice;
-        BOperandMod = Mods::Lattice;
-        AOperand = 0;
-        BOperand = 0;
-    }
-    Sub_command(Opcodes a, Modifiers b, Mods c, Mods d, int e, int f) {
-        Body = a;
-        OpcodeMod = b;
-        AOperandMod = c;
-        BOperandMod = d;
-        AOperand = e;
-        BOperand =f;
-    }
-    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, std::list<Flow>::iterator it) override {
-        size_t size = Core.size();
-        SetSD(Core,it,size);
-        switch (OpcodeMod) {
-            case (Modifiers::A) :
-                Core[Destination]->AOperand = (Core[Source]->AOperand-Core[Destination]->AOperand)%size;
+    explicit Sub_command(Modifiers x) { Fields.OpcodeMod = x;Name = "SUB";}
+    void Execution(ExecutionContext &Executor) override {
+        Executor.SetOffsets(Fields);
+        std::cout << Executor.getCurrentWarriorName()
+                  << " make some kind of sub from: " << Fields.AOffset
+                  << " to: " << Fields.BOffset << std::endl;
+        switch (Fields.OpcodeMod) {
+            case (Modifiers::A):
+                Executor.setA(Fields.BOffset,
+                              Executor.getA(Fields.AOffset) -
+                              Executor.getA(Fields.BOffset));
                 break;
-            case (Modifiers::B) :
-                Core[Destination]->BOperand = (Core[Source]->BOperand-Core[Destination]->BOperand)%size;
+            case (Modifiers::B):
+                Executor.setB(Fields.BOffset,
+                              Executor.getB(Fields.AOffset) -
+                              Executor.getB(Fields.BOffset));
                 break;
             case (Modifiers::AB):
-                Core[Destination]->BOperand = (Core[Destination]->BOperand-Core[Source]->AOperand)%size;
+                Executor.setB(Fields.BOffset,
+                              Executor.getA(Fields.AOffset) -
+                              Executor.getB(Fields.BOffset));
                 break;
             case (Modifiers::BA):
-                Core[Destination]->AOperand = (Core[Destination]->AOperand- Core[Source]->BOperand)%size;
+                Executor.setA(Fields.BOffset,
+                              Executor.getB(Fields.AOffset) -
+                              Executor.getA(Fields.BOffset));
                 break;
-            case (Modifiers ::I):
             case (Modifiers::Not):
+            case (Modifiers::I):
             case (Modifiers::F):
-                Core[Destination]->AOperand = (Core[Source]->AOperand-Core[Destination]->AOperand)%size;
-                Core[Destination]->BOperand = (Core[Source]->BOperand-Core[Destination]->BOperand)%size;
+                Executor.setA(Fields.BOffset,
+                              Executor.getA(Fields.AOffset) -
+                              Executor.getA(Fields.BOffset));
+                Executor.setB(Fields.BOffset,
+                              Executor.getB(Fields.AOffset) -
+                              Executor.getB(Fields.BOffset));
                 break;
             case (Modifiers::X):
-
-            default:
-                Core[Destination]->BOperand = (Core[Source]->AOperand-Core[Destination]->BOperand)%size;
-                Core[Destination]->AOperand = (Core[Source]->BOperand-Core[Destination]->AOperand)%size;
+                Executor.setB(Fields.BOffset,
+                              Executor.getA(Fields.AOffset) -
+                              Executor.getB(Fields.BOffset));
+                Executor.setA(Fields.BOffset,
+                              Executor.getB(Fields.AOffset) -
+                              Executor.getA(Fields.BOffset));
                 break;
-
         }
-        (*it).Address = ((*it).Address+1)%size;
+        Executor.ForwardQueue();
     }
     Sub_command* Clone() override {
         return new Sub_command(*this);
     }
 };
-Instruction* sc() {
-    return new Sub_command;
-}
 namespace {
-    bool b = Factory::get_instance()->regist3r(Opcodes::SUB, sc);
+    Instruction* Subab() {return new Sub_command(Modifiers::AB);}
+    Instruction* Subba() {return new Sub_command(Modifiers::BA);}
+    Instruction* Subta() {return new Sub_command(Modifiers::A);}
+    Instruction* Subtb() {return new Sub_command(Modifiers::B);}
+    Instruction* Subtf() {return new Sub_command(Modifiers::F);}
+    Instruction* Subx() {return new Sub_command(Modifiers::X);}
+    Instruction* Subi() {return new Sub_command(Modifiers::I);}
+    bool a = Factory::get_instance()->regist3r("SUB.AB",&Subab);
+    bool b = Factory::get_instance()->regist3r("SUB.BA",&Subba);
+    bool c = Factory::get_instance()->regist3r("SUB.A",&Subta);
+    bool d = Factory::get_instance()->regist3r("SUB.B",&Subtb);
+    bool f = Factory::get_instance()->regist3r("SUB.F",&Subtf);
+    bool e = Factory::get_instance()->regist3r("SUB.X",&Subx);
+    bool g = Factory::get_instance()->regist3r("SUB.I",&Subi);
+bool w = Factory::get_instance()->nameRegister("SUB","SUB");
 }

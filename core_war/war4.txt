@@ -4,8 +4,4 @@
 ;strategy sru datami na kajdoe 4 pole
 ;name BASTARD TYRIONA LANNISTAH
 ;assert(CORESIZE % 4 == 0)
-ORG 1
-DAT.F #1 #0  ;ajsadkdsaihdaujhdsau
-ADD.AB #4 $1
-MOV.I $-2 $-2 ;adsasd
-JMP.A $-2 #0
+MOV.I $0 $1

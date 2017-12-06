@@ -1,50 +1,73 @@
 
 #include "factory.hpp"
-#include <iostream>
 class Sne_command : public Instruction {
 public:
-    explicit Sne_command(Modifiers x) { OpcodeMod = x;}
-    void Execution (std::vector<Instruction*>& Core,CircularBuffer& Queue, CircularBuffer::Iterator& it) override {
-        size_t size = Core.size();
-        SetOffsets(Core,it,size);
-        switch (OpcodeMod) {
+    explicit Sne_command(Modifiers x) { Fields.OpcodeMod = x; Name = "SNE";}
+    void Execution (ExecutionContext& Executor) override {
+        Executor.SetOffsets(Fields);
+        switch (Fields.OpcodeMod) {
             case (Modifiers::A) :
-                (Core[AOffset]->AOperand!=Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)!=Executor.getA(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::B) :
-                (Core[AOffset]->BOperand!=Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getB(Fields.AOffset)!=Executor.getB(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::AB):
-                (Core[AOffset]->AOperand!=Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)!=Executor.getB(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::BA):
-                (Core[AOffset]->BOperand!=Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getB(Fields.AOffset)!=Executor.getA(Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::F):
-                (Core[AOffset]->AOperand!=Core[BOffset]->AOperand || Core[AOffset]->BOperand!=Core[BOffset]->BOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
+                if (Executor.getA(Fields.AOffset)!=Executor.getA(Fields.BOffset)&&Executor.getB(Fields.AOffset)!=Executor.getB(Fields.BOffset) ) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
             case (Modifiers::X):
-                (Core[AOffset]->AOperand!=Core[BOffset]->BOperand || Core[AOffset]->BOperand!=Core[BOffset]->AOperand) ? (*it).Address=((*it).Address+2)%size : (*it).Address=((*it).Address+1)%size;
-                break;
-            case (Modifiers ::Not):
+                if (Executor.getA(Fields.AOffset)!=Executor.getB(Fields.BOffset)||Executor.getB(Fields.AOffset)!=Executor.getA(Fields.BOffset) ) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
+            case (Modifiers::Not):
             case (Modifiers ::I):
-                 (Core[AOffset]==Core[BOffset]) ? (*it).Address=((*it).Address+1)%size : (*it).Address=((*it).Address+2)%size;
-                break;
+                if(Executor.isInstructionsEqual(Fields.AOffset,Fields.BOffset)) {
+                    Executor.ForwardQueue();
+                    Executor.ForwardQueue();
+                    return;
+                }
         }
+        Executor.ForwardQueue();
     }
+
+
     Sne_command* Clone() override {
         return new Sne_command(*this);
     }
 };
-Instruction* sneab() {return new Sne_command(Modifiers::AB);}
-Instruction* sneba() {return new Sne_command(Modifiers::BA);}
-Instruction* sneta() {return new Sne_command(Modifiers::A);}
-Instruction* snetb() {return new Sne_command(Modifiers::B);}
-Instruction* snetf() {return new Sne_command(Modifiers::F);}
-Instruction* snex() {return new Sne_command(Modifiers::X);}
-Instruction* snei() {return new Sne_command(Modifiers::I);}
+
 
 namespace {
+    Instruction* sneab() {return new Sne_command(Modifiers::AB);}
+    Instruction* sneba() {return new Sne_command(Modifiers::BA);}
+    Instruction* sneta() {return new Sne_command(Modifiers::A);}
+    Instruction* snetb() {return new Sne_command(Modifiers::B);}
+    Instruction* snetf() {return new Sne_command(Modifiers::F);}
+    Instruction* snex() {return new Sne_command(Modifiers::X);}
+    Instruction* snei() {return new Sne_command(Modifiers::I);}
     bool a = Factory::get_instance()->regist3r("SNE.AB",&sneab);
     bool b = Factory::get_instance()->regist3r("SNE.BA",&sneba);
     bool c = Factory::get_instance()->regist3r("SNE.A",&sneta);
@@ -52,4 +75,5 @@ namespace {
     bool f = Factory::get_instance()->regist3r("SNE.F",&snetf);
     bool e = Factory::get_instance()->regist3r("SNE.X",&snex);
     bool g = Factory::get_instance()->regist3r("SNE.I",&snei);
+bool w = Factory::get_instance()->nameRegister("SNE","SNE");
 }
