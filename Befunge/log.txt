@@ -1,0 +1,5 @@
+Dorou, mir!
+BEFUNGE-93 CONSOLE INPUT MODE; HERE THE RULES:
+1)MAXIMUM SYMBOLS IN ONE LINE - 80
+2)MAXIMUM LINES - 25  (all lines after this limit will be ignored)
+3)TO STOP INPUT TYPE 'END' without quotes IN NEW(!!!) LINE 
