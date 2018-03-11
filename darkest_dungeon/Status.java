@@ -1,3 +1,3 @@
-public enum STATUS {
+public enum Status {
     ALIVE,DEAD,MISSING
 }
