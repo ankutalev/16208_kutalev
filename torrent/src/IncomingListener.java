@@ -10,26 +10,44 @@ import java.util.*;
 
 public class IncomingListener implements Runnable {
 
+    private void sendInfoMessage(SocketChannel sc) {
+        String fileName = "bivis i batthhead";
+        System.out.println(fileName);
+        ByteBuffer a = ByteBuffer.allocate(4);
+        a.putInt(fileName.length());
+        a.rewind();
+        try {
+            sc.write(a);
+            sc.write(ByteBuffer.wrap(fileName.getBytes()));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void run() {
         try (InputStreamReader loadfile = new InputStreamReader(IncomingListener.class.getClassLoader().getResourceAsStream(propertiesFileName), "UTF-8")) {
             pathesToFiles.load(loadfile);
             Selector selector = Selector.open();
             ServerSocketChannel ssc = ServerSocketChannel.open();
-            ssc.bind(new InetSocketAddress("192.168.0.198", PORT));
+            ssc.bind(new InetSocketAddress("localhost", PORT));
             ssc.configureBlocking(false);
             int ops = ssc.validOps();
             ssc.register(selector, ops, null);
             int connections;
-            ByteBuffer readBuffer = ByteBuffer.allocate(this.ASYNC_BUFF_LENGTH);
+            ByteBuffer readBuffer = ByteBuffer.allocate(4);
             SocketChannel is = null;
-            String keyIp = " null";
+            String keyIp = "null";
             while (true) {
-                connections = selector.select(10000);
+                connections = selector.select(1000);
 //                System.out.println("zdras'te");
 
 //                System.out.println(heh.position());
+
                 if (connections == 0) {
+                    System.out.println("waiting for peer");
                     System.out.println("waiting for peer");
                     continue;
                 }
@@ -63,6 +81,8 @@ public class IncomingListener implements Runnable {
                             heh = ByteBuffer.allocate(messageLen);
                             System.out.println(messageLen);
                             peersStatus.replace(keyIp, false);
+                            is.read(heh);
+                            System.out.println(heh);
                         } else {
                             if (heh.hasRemaining()) {
                                 System.out.println("vse ewe kachau!");
@@ -106,7 +126,7 @@ public class IncomingListener implements Runnable {
 //                        System.out.println(new String(data));
 //                        System.out.println("heh")
                     }
-                   else if (key.isWritable()) {
+                    else if (key.isWritable()) {
                         if (heh.position()==messageLen) {
                             System.out.println("piwu!");
                             String msg = new String(heh.array());
@@ -114,11 +134,17 @@ public class IncomingListener implements Runnable {
                             heh.clear();
                             if (msgData.length==1) {
                                 if (pathesToFiles.containsKey(msg)) {
-                                    is.write(ByteBuffer.allocate(4).putInt("ALL".length()));
+                                    ByteBuffer x = ByteBuffer.allocate(4);
+                                    x.putInt("ALL".length());
+                                    x.rewind();
+                                    is.write(x);
                                     is.write(ByteBuffer.wrap("ALL".getBytes()));
                                 }
                                 else {
-                                    is.write(ByteBuffer.allocate(4).putInt("NONE".length()));
+                                    ByteBuffer x = ByteBuffer.allocate(4);
+                                    x.putInt("NONE".length());
+                                    x.rewind();
+                                    is.write(x);
                                     is.write(ByteBuffer.wrap("NONE".getBytes()));
                                 }
                             }
@@ -132,7 +158,7 @@ public class IncomingListener implements Runnable {
 //                            Thread.sleep(5000);
 //                        } catch (InterruptedException e) {
 //                            e.printStackTrace();
-                        }
+                    }
 ////
                 }
                 it.remove();
@@ -185,7 +211,7 @@ public class IncomingListener implements Runnable {
     public static void startListening() {
     }
 
-    private ByteBuffer heh = ByteBuffer.allocate(50000);
+    private ByteBuffer heh = ByteBuffer.allocate(4);
     private final int ASYNC_BUFF_LENGTH = 1024;
     private List<Byte> tmpBuffer = new ArrayList<>();
     private Map<String, ArrayList<Integer>> tableOfAvailability = new HashMap<>();
