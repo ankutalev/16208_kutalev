@@ -14,8 +14,14 @@ public class Downloader {
         try {
             this.fileName = fileName;
             this.pieceNumber= filePieces.size();
+            receivedPiece = ByteBuffer.allocate(filePieces.get(0).getLength());
+            for (int i = 0; i < pieceNumber; i++) {
+                recordedPieces.put(i,false);
+            }
             SocketChannel sc;
             String fullIp;
+
+
             for (String ip: ipAdresses) {
                 sc = SocketChannel.open(new InetSocketAddress(ip,9875));
                 fullIp = sc.getRemoteAddress().toString();
@@ -39,13 +45,30 @@ public class Downloader {
     }
 
     private void downloadPiece(SocketChannel sc, FilePiece piece)  {
-//       try (FileOutputStream fileWriter = new FileOutputStream("/home/ulyssess/tmp/piece"+piece.getId());
-//            DataInputStream is = new DataInputStream(firstTestSocket.getInputStream());
-//            PrintWriter os = new PrintWriter(new OutputStreamWriter(firstTestSocket.getOutputStream())) ) {
+        pieceLength = piece.getLength();
+        String msg = fileName+" "+piece.getId()*pieceLength+" "+pieceLength;
+        try {
+
+            System.out.println("dlina :mesagi" +msg.length());
+            System.out.println("dlina kuska"+pieceLength);
+            ByteBuffer size = ByteBuffer.allocate(4);
+            size.putInt(msg.length());
+            size.rewind();
+            sc.write(size);
+            sc.write(ByteBuffer.wrap(msg.getBytes()));
+            System.out.println(msg);
+            sc.read(receivedPiece);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(pieceLength);
+        System.out.println(receivedPiece);
+        System.exit(0);
 
 //           os.println(fileName+" "+piece.getId()*pieceLength+" "+piece.getLength());
 //           os.flush();
-           byte data[] = new byte[(int) piece.getLength()];
+           byte data[] = new byte[piece.getLength()];
 
 
 //           is.readNBytes(data,0, (int) piece.getLength());
@@ -125,7 +148,7 @@ public class Downloader {
         Integer index;
         do {
              index = ThreadLocalRandom.current().nextInt(0,tableOfAvailablePieces.get(src).size()-1);
-        }while (!recordedPieces.get(index));
+        }while (recordedPieces.get(index));
 
         int pieceNumber = tableOfAvailablePieces.get(src).get(index);
         recordedPieces.replace(pieceNumber,true);
@@ -138,6 +161,7 @@ public class Downloader {
     private String fileName;
     private FileWorker fw;
     private int pieceNumber;
+    private ByteBuffer receivedPiece;
 }
 
 
