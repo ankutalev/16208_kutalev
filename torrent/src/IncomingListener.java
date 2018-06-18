@@ -72,6 +72,7 @@ public class IncomingListener implements Runnable {
                     if (key.isReadable()) {
                         System.out.println("YA READEBLE!");
                         if (peersStatus.get(keyIp)) {
+                            readBuffer.clear();
                             is = (SocketChannel) key.channel();
                             System.out.println(is);
                             int len = is.read(readBuffer);
@@ -91,46 +92,23 @@ public class IncomingListener implements Runnable {
                         } else {
                             if (heh.hasRemaining()) {
                                 System.out.println("vse ewe kachau!");
-                                is.read(heh);
+                                if (is.read(heh)==-1) {
+                                    System.out.println("chelik sdoh!");
+                                    heh.clear();
+                                    readBuffer.clear();
+                                    key.cancel();
+                                    break;
+                                }
                                 System.out.println(heh);
                             } else if (heh.position() == messageLen) {
                                 System.out.println(heh);
                                 heh.clear();
                                 System.out.println("YA SKACHAL!");
-                                is.register(selector, SelectionKey.OP_WRITE);
                                 peersStatus.replace(keyIp, true);
                             }
                         }
-//                        System.out.println(len);
-//                        switch (len) {
-//                            case 0:
-//                                readBuffer.clear();
-//                                break;
-//                            case -1:
-//                                System.out.println("chelik sdoh");
-//                                is.close();
-//                                break;
-//                            default:
-//                                for (byte b: readBuffer.array()) {
-//                                    tmpBuffer.add(b);
-//                                }
-////                                System.out.println(new String(readBuffer.array()).trim());
-//                                if (len==ASYNC_BUFF_LENGTH) {
-//                                    readBuffer.clear();
-//                                }
-//                                else {
-//                                    System.out.println(tmpBuffer);
-//                                    tmpBuffer.clear();
-//                                    readBuffer.clear();
-//                                }
-//                        }
-
-//                        byte data[] = new byte[4];
-//                        readBuffer.get(data);
-//                        System.exit(0);
-//                        System.out.println(new String(data));
-//                        System.out.println("heh")
                     }
+
                     else if (key.isWritable()) {
                         if (heh.position()==messageLen) {
                             System.out.println("piwu!");
@@ -151,6 +129,15 @@ public class IncomingListener implements Runnable {
                                     x.rewind();
                                     is.write(x);
                                     is.write(ByteBuffer.wrap("NONE".getBytes()));
+                                }
+                                peersStatus.replace(keyIp, true);
+                            }
+
+                            // piece message
+                            else {
+                                System.out.println("ETO SOOBSHENIE!");
+                                for (String s:msgData) {
+                                    System.out.println(s);
                                 }
                             }
                         }
