@@ -75,6 +75,11 @@ public class IncomingListener implements Runnable {
                             is = (SocketChannel) key.channel();
                             System.out.println(is);
                             int len = is.read(readBuffer);
+                            if (len==-1){
+                                System.out.println("chelik sdoh");
+                                key.cancel();
+                                break;
+                            }
                             System.out.println(len);
                             readBuffer.rewind();
                             messageLen = readBuffer.getInt();

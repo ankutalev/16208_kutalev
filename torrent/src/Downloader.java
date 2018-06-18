@@ -3,9 +3,11 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Downloader {
     Downloader (String fileName,List<String> ipAdresses, List <FilePiece> filePieces) {
@@ -13,32 +15,21 @@ public class Downloader {
             this.fileName = fileName;
             this.pieceNumber= filePieces.size();
             SocketChannel sc;
+            String fullIp;
             for (String ip: ipAdresses) {
                 sc = SocketChannel.open(new InetSocketAddress(ip,9875));
+                fullIp = sc.getRemoteAddress().toString();
                 sendInfoMessage(sc);
                 receiveMessage(sc);
+                int availablePieces = tableOfAvailablePieces.get(fullIp).size();
+                if(availablePieces>0) {
+                    int nextPieceNumber = getNumberOfNextRecordedPiece(fullIp);
+                    System.out.println(nextPieceNumber);
+                    downloadPiece(sc,filePieces.get(nextPieceNumber));
+                }
+
+
             }
-//  sc.connect(new InetSocketAddress(ipAdresses.get(0),9875));
-
-
-            try {
-                Thread.sleep(50000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //            sc.close();
-//            System.out.println(new String(heh.array()));
-//            System.exit(-2);
-//            System.exit(0);
-//            pieceLength = (int) filePieces.get(0).getLength();
-//            for (FilePiece fp: filePieces) {
-//                firstTestSocket = new Socket(ipAdresses.get(0),9875);
-//                downloadPiece(fp);
-//            }
-
-//                downloadPiece(filePieces.get(0));
-//                firstTestSocket = new Socket(ipAdresses.get(0),9875);
-//                downloadPiece(filePieces.get(1));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,7 +38,7 @@ public class Downloader {
         }
     }
 
-    private void downloadPiece(FilePiece piece)  {
+    private void downloadPiece(SocketChannel sc, FilePiece piece)  {
 //       try (FileOutputStream fileWriter = new FileOutputStream("/home/ulyssess/tmp/piece"+piece.getId());
 //            DataInputStream is = new DataInputStream(firstTestSocket.getInputStream());
 //            PrintWriter os = new PrintWriter(new OutputStreamWriter(firstTestSocket.getOutputStream())) ) {
@@ -61,7 +52,7 @@ public class Downloader {
            piece.data = data;
 //           fileWriter.write(piece.data); // todo: eto toje v failovy tred pihnut'
            FileWorker.invokeLater(new RecordPieceTask(piece,fileName));
-       }
+    }
 
 //       catch (IOException e) {
 //           e.printStackTrace();
@@ -69,7 +60,7 @@ public class Downloader {
 //           System.exit(0);
 //       }
 
-    }
+
 
     private void sendInfoMessage(SocketChannel sc) {
         System.out.println(fileName);
@@ -99,12 +90,50 @@ public class Downloader {
             msg.get(data);
             String answer = new String(data);
             System.out.println(answer);
+            parseMessage(answer,sc.getRemoteAddress().toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private Map<String,Boolean> tableOfAvailablePieces = new HashMap<>();
+    private void parseMessage(String msg,String source) {
+        if (!tableOfAvailablePieces.containsKey(source))
+            tableOfAvailablePieces.put(source,new ArrayList<>());
+
+        switch (msg) {
+            case "ALL":
+                for (int i = 0; i < pieceNumber; i++) {
+                    tableOfAvailablePieces.get(source).add(i);
+                    System.out.println(tableOfAvailablePieces.get(source).get(i));
+                }
+                break;
+            case "NONE":
+                break;
+            default:
+                String [] data = msg.split(" ");
+                if (data[0].equals("PIECES")) {
+                    for (String s:data) {
+                        tableOfAvailablePieces.get(source).add(Integer.parseInt(s));
+                    }
+                }
+                else
+                    System.out.println("PRISLALI HUYNU!");
+        }
+    }
+
+    private int getNumberOfNextRecordedPiece(String src) {
+        Integer index;
+        do {
+             index = ThreadLocalRandom.current().nextInt(0,tableOfAvailablePieces.get(src).size()-1);
+        }while (!recordedPieces.get(index));
+
+        int pieceNumber = tableOfAvailablePieces.get(src).get(index);
+        recordedPieces.replace(pieceNumber,true);
+        return pieceNumber;
+    }
+
+    private Map<Integer,Boolean> recordedPieces = new HashMap<>();
+    private Map<String,List<Integer>> tableOfAvailablePieces = new HashMap<>();
     private int pieceLength;
     private String fileName;
     private FileWorker fw;
